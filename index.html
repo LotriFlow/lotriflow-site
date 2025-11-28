@@ -2,20 +2,88 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="LotriFlow - Workflow automation for modern productivity. Integrate tools, build custom workflows, and get real-time insights."
+    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LotriFlow - Product Site</title>
+    <title>LotriFlow - Workflow Automation for Modern Productivity</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <header class="hero">
+    <header>
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="#" class="nav-logo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 120 120"
+              fill="none"
+            >
+              <defs>
+                <linearGradient
+                  id="tech_gradient"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #0f172a; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #0ea5e9; stop-opacity: 1"
+                  />
+                </linearGradient>
+              </defs>
+              <rect
+                x="10"
+                y="10"
+                width="100"
+                height="100"
+                rx="24"
+                fill="url(#tech_gradient)"
+              />
+              <path
+                d="M 45 40 L 65 60 L 45 80"
+                stroke="white"
+                stroke-width="12"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M 75 40 L 95 60 L 75 80"
+                stroke="white"
+                stroke-width="12"
+                stroke-opacity="0.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            <span>LotriFlow</span>
+          </a>
+          <ul class="nav-menu">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
       <div class="hero-content">
-        <h1>LotriFlow</h1>
         <p class="subtitle">Workflow automation for modern productivity</p>
-        <a href="#" class="button hero-btn">Get Started</a>
+        <a href="#features" class="button hero-btn">Learn More</a>
       </div>
     </header>
     <main>
-      <section class="features">
+      <section id="features" class="features">
         <h2>Why LotriFlow?</h2>
         <div class="feature-grid">
           <div class="feature-card">
@@ -36,7 +104,7 @@
           </div>
         </div>
       </section>
-      <section class="about">
+      <section id="about" class="about">
         <h2>About LotriFlow</h2>
         <p>
           LotriFlow empowers individuals and teams to automate, connect, and
@@ -44,9 +112,14 @@
           productivity with a platform designed for simplicity and power.
         </p>
       </section>
+      <section id="contact" class="contact">
+        <h2>Ready to Get Started?</h2>
+        <p>Take control of your workflows and boost your productivity today.</p>
+        <a href="#" class="button">Sign Up Now</a>
+      </section>
     </main>
     <footer>
-      <p>&copy; 2025 LotriFlow. All rights reserved.</p>
+      <p>&copy; 2024 LotriFlow. All rights reserved.</p>
     </footer>
   </body>
 </html>
