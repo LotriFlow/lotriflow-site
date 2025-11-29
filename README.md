@@ -3,23 +3,27 @@
 Welcome to the LotriFlow product site!
 
 ## Overview
-LotriFlow is a modern workflow automation platform designed to streamline your business and personal productivity. Easily integrate with your favorite tools, build custom workflows, and gain real-time insights—all with enterprise-grade security.
+LotriFlow offers innovative apps designed to improve your health and productivity. Our suite of tools helps you achieve personal goals with intuitive interfaces and powerful features.
 
 ## Features
-- Seamless integration with popular tools
-- Customizable, no-code workflows
-- Real-time analytics and reporting
-- Secure and reliable infrastructure
+
+- **Stop Smoking App**: Track your progress, set goals, and get support to quit smoking.
+- **Fasting Tracker**: Monitor your fasting schedules and health metrics.
+- More products coming soon!
 
 ## Getting Started
-Visit [lotriflow.com](https://lotriflow.com) to learn more and get started.
+
+Visit [lotriflow.com](https://lotriflow.com) to explore our apps and start your journey to better living.
 
 ## Repository Structure
+
 - `index.html` – Main landing page
-- `style.css` – Site styling
+- `css/style.css` – Site styling
+- `images/` – Logo and favicon assets
 - `CNAME` – Custom domain configuration
 
 ## License
+
 MIT
 
 ---
