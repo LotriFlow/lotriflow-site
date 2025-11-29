@@ -510,6 +510,29 @@ footer {
 }
 
 @media (max-width: 600px) {
+    nav {
+        padding: 1rem 1.1rem;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .lotriflow-logo {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .logo-img { height: 50px; }
+
+    .logo-name { font-size: 1.6rem; }
+
+    .btn-nav {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        display: inline-flex;
+    }
+
     .hero-title-main { font-size: 2.3rem; }
     .hero-stats { grid-template-columns: 1fr; }
     .product-grid { grid-template-columns: 1fr; }
