@@ -20,70 +20,82 @@
   </head>
   <body>
     <nav>
-      <div class="logo">Lotriflow</div>
+      <a href="#" class="lotriflow-logo">
+        <img src="logo-brand.svg" alt="LotriFlow Logo" class="logo-img" />
+      </a>
       <div class="nav-links">
         <a href="#features">Features</a>
-        <a href="https://github.com/lotriflow" target="_blank">Documentation</a>
-        <a href="https://github.com/lotriflow" class="btn-nav">Get Started</a>
+        <a href="#products">Products</a>
+        <a href="https://github.com/lotriflow" target="_blank" class="btn-nav"
+          >GitHub</a
+        >
       </div>
     </nav>
 
-    <header class="hero">
-      <div class="hero-content">
-        <h1>The Flow of <br />Modern Development.</h1>
-        <p>
-          Lotriflow provides the essential tools to streamline your deployment
-          pipeline. Simple. Fast. Scalable.
-        </p>
-
-        <div class="code-preview">
-          <span class="code-line"
-            >$ npm install <span class="code-cmd">lotriflow</span></span
-          >
-        </div>
-        <br /><br />
-
-        <div class="cta-group">
-          <a
-            href="https://www.npmjs.com/package/lotriflow"
-            target="_blank"
-            class="btn-primary"
-            >View on NPM</a
-          >
-          <a
-            href="https://github.com/lotriflow"
-            target="_blank"
-            class="btn-secondary"
-            >GitHub</a
-          >
-        </div>
+    <header class="hero hero-centered">
+      <div class="hero-content hero-centered-content">
+        <h1 class="hero-title-main">LotriFlow</h1>
+        <p class="hero-subtitle-main">Workflow. Automation. Simplicity.</p>
       </div>
     </header>
 
     <section id="features" class="features">
       <div class="feature-card">
         <div class="feature-icon">⚡</div>
-        <h3>NPM Native</h3>
-        <p>
-          Designed to integrate seamlessly into your existing Node.js
-          environment without bloating your dependencies.
-        </p>
+        <h3>Fast</h3>
+        <p>Blazing fast performance for all your workflow needs.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon">⚙️</div>
-        <h3>Zero Config</h3>
-        <p>
-          Get up and running in seconds with smart defaults that just work, so
-          you can focus on shipping code.
-        </p>
+        <h3>Simple</h3>
+        <p>Easy to set up and integrate with your existing tools.</p>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🛡️</div>
-        <h3>Open Source</h3>
-        <p>
-          Transparent code built by developers, for developers. MIT Licensed and
-          community driven.
-        </p>
+        <div class="feature-icon">📈</div>
+        <h3>Scalable</h3>
+        <p>Built to grow with you, from small projects to enterprise scale.</p>
+      </div>
+    </section>
+
+    <section id="products" class="product-section">
+      <div class="section-header">
+        <h2>Our Products</h2>
+        <p>A suite of tools to help you improve your productivity.</p>
+      </div>
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">🚭</div>
+          <h3>Stop Smoking</h3>
+          <p>
+            A simple app to help you quit smoking by tracking your progress.
+          </p>
+          <a href="#" class="btn-primary">View App</a>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🕒</div>
+          <h3>Fasting</h3>
+          <p>
+            Track your fasting schedule and monitor your progress over time.
+          </p>
+          <a href="#" class="btn-primary">View App</a>
+        </div>
+        <!-- Features section intentionally minimal for logo-focused landing page -->
+      </div>
+    </section>
+
+    <section class="app-store-section">
+      <div class="app-store-listing">
+        <div class="app-store-icon">
+          <img src="logo-icon.svg" alt="LotriFlow App Icon" />
+        </div>
+        <div class="app-store-details">
+          <h3>Lotriflow</h3>
+          <p>Workflow & Automation</p>
+        </div>
+        <div class="app-store-action">
+          <a href="#" class="btn-get">Get</a>
+          <span class="in-app-purchases">In-App Purchases</span>
+        </div>
       </div>
     </section>
 
