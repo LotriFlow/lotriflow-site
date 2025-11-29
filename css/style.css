@@ -372,11 +372,14 @@ header.hero::before {
 }
 
 .product-list li::before {
-    content: "•";
+    content: "";
     position: absolute;
     left: 0;
-    color: var(--primary);
-    font-weight: 900;
+    top: 0.55rem;
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
 }
 
 .pill {
