@@ -437,3 +437,26 @@ footer {
         padding-top: 140px;
     }
 }
+
+/* Footer */
+.footer {
+    background: var(--bg-nav);
+    padding: 2rem var(--container-padding);
+    text-align: center;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+}
+
+.footer p {
+    margin: 0.5rem 0;
+    color: var(--text-muted);
+}
+
+.footer a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}

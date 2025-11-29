@@ -54,15 +54,22 @@
       </div>
     </header>
 
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 LotriFlow. All rights reserved.</p>
+        <p>Contact us: <a href="mailto:hello@lotriflow.com">hello@lotriflow.com</a></p>
+      </div>
+    </footer>
+
     <script>
       let ticking = false;
-      window.addEventListener('scroll', function() {
+      window.addEventListener("scroll", function () {
         if (!ticking) {
-          requestAnimationFrame(function() {
+          requestAnimationFrame(function () {
             const scrolled = window.pageYOffset;
-            const logo = document.querySelector('.hero-logo-main');
-            const subtitle = document.querySelector('.hero-subtitle-main');
-            const description = document.querySelector('.hero-description');
+            const logo = document.querySelector(".hero-logo-main");
+            const subtitle = document.querySelector(".hero-subtitle-main");
+            const description = document.querySelector(".hero-description");
             if (logo) {
               logo.style.transform = `translateY(${scrolled * -0.3}px)`;
             }
