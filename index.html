@@ -48,8 +48,35 @@
           Start your journey with our smoking cessation app and explore more
           tools for health and productivity.
         </p>
-        <a href="https://apps.apple.com" class="btn-primary">Download on App Store</a>
+        <a href="https://apps.apple.com" class="btn-primary"
+          >Download from the App Store</a
+        >
       </div>
     </header>
+
+    <script>
+      let ticking = false;
+      window.addEventListener('scroll', function() {
+        if (!ticking) {
+          requestAnimationFrame(function() {
+            const scrolled = window.pageYOffset;
+            const logo = document.querySelector('.hero-logo-main');
+            const subtitle = document.querySelector('.hero-subtitle-main');
+            const description = document.querySelector('.hero-description');
+            if (logo) {
+              logo.style.transform = `translateY(${scrolled * -0.3}px)`;
+            }
+            if (subtitle) {
+              subtitle.style.transform = `translateY(${scrolled * -0.2}px)`;
+            }
+            if (description) {
+              description.style.transform = `translateY(${scrolled * -0.1}px)`;
+            }
+            ticking = false;
+          });
+          ticking = true;
+        }
+      });
+    </script>
   </body>
 </html>
