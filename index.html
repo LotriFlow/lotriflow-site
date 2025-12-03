@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta
       name="description"
-      content="LotriFlow - Health and productivity tools. SmokeFree app helps you quit smoking with real-time timers, health milestones, cravings tracking, and Apple Watch support."
+      content="SmokeFree Journey - Quit smoking with real-time timers, health milestones, cravings tracking, and Apple Watch support."
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LotriFlow | SmokeFree - Your Quit Smoking Companion</title>
+    <title>SmokeFree Journey | Quit Smoking App</title>
     <link rel="icon" href="images/favicon.ico" />
     <link rel="icon" type="image/png" href="images/favicon.png" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
@@ -20,6 +20,34 @@
     />
 
     <link rel="stylesheet" href="css/style.css" />
+    <style>
+      .app-store-badge {
+        height: 50px;
+        transition: transform 0.2s ease;
+      }
+      .app-store-badge:hover {
+        transform: scale(1.05);
+      }
+      .store-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-top: 8px;
+      }
+      .android-coming {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 20px;
+        background: rgba(255,255,255,0.8);
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        color: #64748b;
+        font-size: 0.9rem;
+        font-weight: 500;
+      }
+    </style>
   </head>
   <body>
     <nav>
@@ -35,30 +63,35 @@
         </span>
       </a>
       <div class="nav-links">
-        <a href="#products">Products</a>
-        <a href="#why">Why LotriFlow</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
         <a href="#contact">Contact</a>
       </div>
-      <a href="#download" class="btn-nav">Get the app</a>
+      <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774" class="btn-nav">Get the app</a>
     </nav>
 
     <header class="hero hero-centered">
       <div class="hero-bg-accent"></div>
       <div class="hero-content hero-centered-content">
-        <div class="hero-badge">Health & Productivity Studio</div>
+        <div class="hero-badge">Quit Smoking App</div>
         <h1 class="hero-title-main">
-          Build healthier routines, one focused day at a time.
+          Your journey to smoke-free starts here.
         </h1>
         <p class="hero-description">
-          LotriFlow crafts purposeful tools to help you quit smoking, reset
-          habits, and reclaim your attention. Designed with calm visuals and
-          actionable guidance.
+          Track your progress, celebrate health milestones, and get support when cravings hit. 
+          All your data stays private on your device.
         </p>
-        <div class="cta-group">
-          <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774" class="btn-primary" id="download"
-            >Download SmokeFree</a
-          >
-          <a href="#products" class="btn-secondary">Explore the toolkit</a>
+        <div class="cta-group" id="download">
+          <div class="store-buttons">
+            <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774">
+              <img 
+                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" 
+                alt="Download on the App Store" 
+                class="app-store-badge"
+              />
+            </a>
+            <span class="android-coming">Android coming soon</span>
+          </div>
         </div>
         <div class="hero-stats">
           <div class="stat-block">
@@ -75,72 +108,13 @@
           </div>
         </div>
       </div>
-      <div class="hero-visual">
-        <div class="hero-orb"></div>
-        <img
-          src="images/lotriflow-logo-blue.svg"
-          alt="LotriFlow Logo"
-          class="hero-logo-main"
-        />
-      </div>
     </header>
 
-    <section id="products" class="product-section">
+    <section id="features" class="why-section">
       <div class="section-header">
-        <h2>Products that meet you where you are</h2>
+        <h2>Everything you need to quit</h2>
         <p>
-          Start with SmokeFree to quit smoking, then layer on fasting and focus tools
-          as your habits strengthen.
-        </p>
-      </div>
-      <div class="product-grid">
-        <article class="product-card">
-          <div class="pill">Available on App Store</div>
-          <h3>SmokeFree Journey</h3>
-          <p class="product-summary">
-            Your personal quit smoking companion with real-time progress tracking,
-            health recovery milestones, and gentle support when cravings hit.
-          </p>
-          <ul class="product-list">
-            <li>⏱️ Live quit timer showing days, hours, minutes smoke-free</li>
-            <li>💰 Money saved calculator based on your smoking habits</li>
-            <li>🏆 15 health milestones from 20 minutes to 15 years</li>
-            <li>📊 Cigarettes not smoked & life regained stats</li>
-            <li>🧘 Breathing exercises for craving moments</li>
-            <li>💬 AI coach for personalized support</li>
-            <li>⌚ Apple Watch app with complications</li>
-            <li>🔒 100% private - all data stays on your device</li>
-          </ul>
-          <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774" class="btn-primary"
-            >Download on the App Store</a
-          >
-        </article>
-        <article class="product-card ghost-card">
-          <div class="pill pill-ghost">Coming soon</div>
-          <h3>Fasting & Focus</h3>
-          <p class="product-summary">
-            Build calm, sustainable routines with fasting timers, focus blocks,
-            and insight dashboards that respect your time.
-          </p>
-          <ul class="product-list">
-            <li>Adaptive fasting schedules with gentle nudges</li>
-            <li>Minimal focus timer with distraction checks</li>
-            <li>Weekly reflections to keep progress visible</li>
-          </ul>
-          <p class="waitlist-note">
-            Want early access? Say hello at
-            <a href="mailto:hello@lotriflow.com">hello@lotriflow.com</a>
-          </p>
-        </article>
-      </div>
-    </section>
-
-    <section id="why" class="why-section">
-      <div class="section-header">
-        <h2>Why LotriFlow works</h2>
-        <p>
-          Clear design, calming interactions, and data that stays personal. Each
-          tool is crafted to lower friction and keep you moving.
+          Simple tools that keep you motivated and on track.
         </p>
       </div>
       <div class="features">
@@ -149,34 +123,30 @@
           <h3>Privacy-first</h3>
           <p>
             All your data stays on your device. No accounts, no tracking, no cloud uploads.
-            Your health journey is nobody's business but yours.
           </p>
         </div>
         <div class="feature-card">
           <span class="feature-icon">02</span>
-          <h3>Progress you can see</h3>
+          <h3>See your progress</h3>
           <p>
-            Real-time stats, animated milestones, and clear dashboards keep your wins 
-            visible and your next goal obvious.
+            Real-time stats, animated milestones, and clear dashboards keep your wins visible.
           </p>
         </div>
         <div class="feature-card">
           <span class="feature-icon">03</span>
-          <h3>Calm aesthetic</h3>
+          <h3>Support when needed</h3>
           <p>
-            Dark mode design, soft gradients, and breathing room help you focus
-            on the habit, not the interface.
+            Breathing exercises for cravings and an AI coach for personalized guidance.
           </p>
         </div>
       </div>
     </section>
 
-    <section class="flow-section">
+    <section id="how-it-works" class="flow-section">
       <div class="section-header">
-        <h2>Your quit journey, simplified</h2>
+        <h2>How it works</h2>
         <p>
-          A guided path from day one through long-term freedom, designed
-          to keep momentum without overwhelm.
+          Three simple steps to start your smoke-free journey.
         </p>
       </div>
       <div class="flow-steps">
@@ -185,8 +155,7 @@
           <div>
             <h3>Set your quit date</h3>
             <p>
-              Enter when you stopped smoking and your smoking habits. The app 
-              calculates your personalized recovery timeline.
+              Enter when you stopped smoking and your habits. The app calculates your personalized recovery timeline.
             </p>
           </div>
         </div>
@@ -195,18 +164,16 @@
           <div>
             <h3>Watch your progress</h3>
             <p>
-              See real-time stats: time smoke-free, money saved, cigarettes avoided,
-              and health milestones unlocking as your body heals.
+              See real-time stats: time smoke-free, money saved, cigarettes avoided, and health milestones unlocking.
             </p>
           </div>
         </div>
         <div class="flow-step">
           <div class="step-marker">3</div>
           <div>
-            <h3>Get support when needed</h3>
+            <h3>Stay motivated</h3>
             <p>
-              Use breathing exercises during cravings, check your Apple Watch for
-              motivation, or chat with the AI coach for personalized guidance.
+              Use breathing exercises during cravings, check your Apple Watch, or chat with the AI coach.
             </p>
           </div>
         </div>
@@ -221,37 +188,12 @@
           <a href="mailto:hello@lotriflow.com">hello@lotriflow.com</a>
         </p>
         <div id="contact" class="footer-links">
-          <a href="#products">Products</a>
-          <a href="#why">Why LotriFlow</a>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How It Works</a>
           <a href="privacy.html">Privacy Policy</a>
           <a href="terms.html">Terms of Service</a>
         </div>
       </div>
     </footer>
-
-    <script>
-      let ticking = false;
-      window.addEventListener("scroll", function () {
-        if (!ticking) {
-          requestAnimationFrame(function () {
-            const scrolled = window.pageYOffset;
-            const logo = document.querySelector(".hero-logo-main");
-            const title = document.querySelector(".hero-title-main");
-            const description = document.querySelector(".hero-description");
-            if (logo) {
-              logo.style.transform = `translateY(${scrolled * -0.3}px)`;
-            }
-            if (title) {
-              title.style.transform = `translateY(${scrolled * -0.2}px)`;
-            }
-            if (description) {
-              description.style.transform = `translateY(${scrolled * -0.1}px)`;
-            }
-            ticking = false;
-          });
-          ticking = true;
-        }
-      });
-    </script>
   </body>
 </html>
