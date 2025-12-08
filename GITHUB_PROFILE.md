@@ -1,6 +1,6 @@
 # LotriFlow
 
-![LotriFlow logo](images/lotriflow-logo-blue.svg)
+![LotriFlow logo](assets/logo.png)
 
 Purposeful tools that help you quit smoking, build fasting rhythms, and protect your focus. Calm visuals, clear guidance, and data that stays personal.
 

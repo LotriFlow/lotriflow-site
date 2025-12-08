@@ -574,4 +574,40 @@ footer {
         justify-content: center;
         text-align: center;
     }
+
+    /* Hover animation for feature cards */
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Product grid */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* Hero visual on larger screens */
+@media (min-width: 961px) {
+  header.hero {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .hero-visual {
+    text-align: right;
+  }
+}
+
+/* Improved focus states */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 4px;
+}
+
 }

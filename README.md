@@ -19,8 +19,10 @@ Visit [lotriflow.com](https://lotriflow.com) to explore our apps and start your 
 
 - `index.html` – Main landing page
 - `css/style.css` – Site styling
-- `images/` – Logo and favicon assets
+ - `images/` – Site images and icons
+ - `assets/` – Generated logo assets (PNG, ICO, SVG)
 - `CNAME` – Custom domain configuration
+ - `assets/` – Generated logo assets (PNG, ICO, SVG)
 
 ## License
 
