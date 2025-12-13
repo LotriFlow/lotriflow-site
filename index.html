@@ -2,75 +2,77 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta
-      name="description"
-      content="LotriFlow Quit - Quit Smoking Tracker & Coach. Real-time timers, health milestones, cravings tracking, and Apple Watch support."
-    />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LotriFlow Quit | Quit Smoking Tracker & Coach</title>
-    <link rel="icon" href="images/favicon.ico" />
-    <link rel="icon" type="image/png" href="images/favicon.png" />
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png" />
+    <meta name="description" content="Quit smoking with SmokeFree Journey — real-time tracking, health milestones, Apple Watch support, and 100% private data." />
+    <meta name="keywords" content="quit smoking app, smoke free, stop smoking tracker, fasting app, health milestones, privacy first app" />
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="SmokeFree Journey by LotriFlow — Quit Smoking with Confidence" />
+    <meta property="og:description" content="Track your smoke-free days, money saved, health recovery stages — all data stays on your device." />
+    <meta property="og:image" content="https://lotriflow.com/images/og-preview.jpg" />
+    <meta property="og:url" content="https://lotriflow.com" />
+    <meta property="og:type" content="website" />
+
+    <title>SmokeFree Journey | Quit Smoking App by LotriFlow</title>
+    <link rel="icon" href="assets/logo.ico" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/logo-180.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="css/style.css" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      "name": "SmokeFree Journey by LotriFlow",
+      "applicationCategory": "HealthAndFitnessApplication",
+      "operatingSystem": "iOS",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "127"
+      }
+    }
+    </script>
+
     <style>
-      .app-store-badge {
-        height: 50px;
-        transition: transform 0.2s ease;
-      }
-      .app-store-badge:hover {
-        transform: scale(1.05);
-      }
-      .store-buttons {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        align-items: center;
-        margin-top: 8px;
-      }
-      .android-coming {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 20px;
-        background: rgba(255,255,255,0.8);
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        color: #64748b;
-        font-size: 0.9rem;
-        font-weight: 500;
-      }
+      .app-store-badge { height: 56px; transition: transform 0.2s ease; }
+      .app-store-badge:hover { transform: scale(1.05); }
+      .store-buttons { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 12px; }
+      .android-soon { padding: 12px 24px; background: rgba(255,255,255,0.9); border: 1px solid #e2e8f0; border-radius: 12px; color: #475569; font-weight: 600; }
+      .hero-visual img { max-width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); }
+      .feature-card { transition: all 0.3s ease; }
+      .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
     </style>
   </head>
   <body>
-    <nav>
-      <a href="#" class="lotriflow-logo">
-        <img
-          src="images/lotriflow-logo-blue.svg"
-          alt="LotriFlow Logo"
-          class="logo-img"
-        />
-        <span class="logo-name">
-          <span class="logo-name-lotri">lotri</span
-          ><span class="logo-name-flow">flow</span>
-        </span>
+    <nav aria-label="Main navigation">
+      <a href="/" class="lotriflow-logo" aria-label="LotriFlow Home">
+        <img src="assets/logo.png" alt="LotriFlow logo" class="logo-img" />
+        <span class="logo-name"><span class="logo-name-lotri">lotri</span><span class="logo-name-flow">flow</span></span>
       </a>
       <div class="nav-links">
         <a href="#features">Features</a>
+        <a href="#products">Products</a>
         <a href="#how-it-works">How It Works</a>
         <a href="#contact">Contact</a>
       </div>
-      <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774" class="btn-nav">Get the app</a>
+      <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774" class="btn-nav" aria-label="Download SmokeFree Journey on the App Store">
+        Get the App
+      </a>
     </nav>
 
-    <header class="hero hero-centered">
+    <header class="hero">
       <div class="hero-bg-accent"></div>
       <div class="hero-content hero-centered-content">
         <div class="hero-badge">Quit Smoking Tracker & Coach</div>
@@ -80,119 +82,125 @@
         <p class="hero-description">
           Track your progress, celebrate health milestones, and get support when cravings hit — all with your data staying private on your device.
         </p>
-        <div class="cta-group" id="download">
-          <div class="store-buttons">
-            <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774">
-              <img 
-                src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" 
-                alt="Download on the App Store" 
-                class="app-store-badge"
-              />
-            </a>
-            <span class="android-coming">Android coming soon</span>
-          </div>
+
+        <div class="store-buttons">
+          <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" class="app-store-badge" />
+          </a>
+          <div class="android-soon">Android version coming soon</div>
         </div>
+
         <div class="hero-stats">
           <div class="stat-block">
             <p class="stat-label">Real-time tracking</p>
-            <p class="stat-value">Live quit timer with money & time saved</p>
+            <p class="stat-value">Live timer + money & cigarettes saved</p>
           </div>
           <div class="stat-block">
-            <p class="stat-label">Health milestones</p>
-            <p class="stat-value">15 recovery stages from 20 min to 15 years</p>
+            <p class="stat-label">15 Health Milestones</p>
+            <p class="stat-value">From 20 minutes to 15 years</p>
           </div>
           <div class="stat-block">
-            <p class="stat-label">Apple Watch</p>
-            <p class="stat-value">Glanceable progress on your wrist</p>
+            <p class="stat-label">Apple Watch Ready</p>
+            <p class="stat-value">Progress at a glance</p>
           </div>
         </div>
       </div>
+
     </header>
 
+    <!-- Features -->
     <section id="features" class="why-section">
       <div class="section-header">
         <h2>Everything you need to quit</h2>
-        <p>
-          Simple tools that keep you motivated and on track.
-        </p>
+        <p>Simple, powerful, private tools that keep you motivated.</p>
       </div>
       <div class="features">
         <div class="feature-card">
           <span class="feature-icon">01</span>
-          <h3>Privacy-first</h3>
-          <p>
-            All your data stays on your device. No accounts, no tracking, no cloud uploads.
-          </p>
+          <h3>100% Privacy First</h3>
+          <p>No accounts. No cloud. No tracking. Your data never leaves your phone.</p>
         </div>
         <div class="feature-card">
           <span class="feature-icon">02</span>
-          <h3>See your progress</h3>
-          <p>
-            Real-time stats, animated milestones, and clear dashboards keep your wins visible.
-          </p>
+          <h3>See Real Progress</h3>
+          <p>Animated milestones, dashboards, and stats that make every day feel like a win.</p>
         </div>
         <div class="feature-card">
           <span class="feature-icon">03</span>
-          <h3>Support when needed</h3>
-          <p>
-            Breathing exercises for cravings and an AI coach for personalized guidance.
-          </p>
+          <h3>Support When You Need It</h3>
+          <p>AI coach, breathing exercises, and Apple Watch complications for tough moments.</p>
         </div>
       </div>
     </section>
 
+    <!-- New Products Section -->
+    <section id="products" class="product-section" style="padding: 6rem var(--container-padding); background: #f8fafc;">
+      <div class="section-header">
+        <h2>Our Growing Suite</h2>
+        <p>More calm, purposeful wellness tools on the way.</p>
+      </div>
+      <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 2rem; max-width: var(--max-width); margin: 0 auto;">
+        <div class="product-card" style="background: white; padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); text-align: center;">
+          <h3>SmokeFree Journey</h3>
+          <p>Available now on iPhone & Apple Watch</p>
+          <a href="https://apps.apple.com/app/smokefree-journey-by-lotriflow/id6740043774" class="btn-primary" style="display: inline-block; margin-top: 1rem;">Download Free</a>
+        </div>
+        <div class="product-card ghost-card" style="background: #f8fafc; border: 2px dashed #cbd5e1; padding: 2rem; border-radius: 16px; text-align: center;">
+          <h3>Fasting Tracker</h3>
+          <p>Beautiful fasting schedules and insights — coming 2026</p>
+          <a href="mailto:hello@lotriflow.com?subject=Join Fasting Waitlist" class="btn-secondary" style="margin-top: 1rem;">Join Waitlist</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
     <section id="how-it-works" class="flow-section">
       <div class="section-header">
         <h2>How it works</h2>
-        <p>
-          Three simple steps to start your smoke-free journey.
-        </p>
+        <p>Three simple steps to freedom.</p>
       </div>
       <div class="flow-steps">
         <div class="flow-step">
           <div class="step-marker">1</div>
           <div>
             <h3>Set your quit date</h3>
-            <p>
-              Enter when you stopped smoking and your habits. The app calculates your personalized recovery timeline.
-            </p>
+            <p>Enter your last cigarette and habits — we calculate your recovery timeline.</p>
           </div>
         </div>
         <div class="flow-step">
           <div class="step-marker">2</div>
           <div>
-            <h3>Watch your progress</h3>
-            <p>
-              See real-time stats: time smoke-free, money saved, cigarettes avoided, and health milestones unlocking.
-            </p>
+            <h3>Watch your body heal</h3>
+            <p>Real-time stats and 15 science-backed health milestones unlock as you stay smoke-free.</p>
           </div>
         </div>
         <div class="flow-step">
           <div class="step-marker">3</div>
           <div>
-            <h3>Stay motivated</h3>
-            <p>
-              Use breathing exercises during cravings, check your Apple Watch, or chat with the AI coach.
-            </p>
+            <h3>Stay strong</h3>
+            <p>Use breathing exercises, AI coach, or glance at your Watch when cravings hit.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" id="contact">
       <div class="container">
-        <p>&copy; 2025 LotriFlow. All rights reserved.</p>
-        <p>
-          Contact us:
-          <a href="mailto:hello@lotriflow.com">hello@lotriflow.com</a>
-        </p>
-        <div id="contact" class="footer-links">
+        <p>&copy; <span id="year">2025</span> LotriFlow. All rights reserved.</p>
+        <p>Contact: <a href="mailto:hello@lotriflow.com">hello@lotriflow.com</a></p>
+        <div class="footer-links">
           <a href="#features">Features</a>
+          <a href="#products">Products</a>
           <a href="#how-it-works">How It Works</a>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Auto-update copyright year
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>
