@@ -1,0 +1,11 @@
+{
+  "name": "smokefree",
+  "version": "1.0.0",
+  "description": "LotriFlow Quit and related web assets",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'No build script defined.'"
+  },
+  "author": "Christo Lotriet",
+  "license": "MIT"
+}

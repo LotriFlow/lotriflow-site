@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Cleaner - BreatheFree</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
+
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+
+    .warning {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 4px;
+      font-size: 0.9rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      margin-bottom: 20px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    #log {
+      background: #f5f5f5;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    #log.show {
+      display: block;
+    }
+
+    .success {
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .error {
+      color: #dc3545;
+      font-weight: bold;
+    }
+
+    .info {
+      color: #17a2b8;
+    }
+
+    .instructions {
+      background: #e7f3ff;
+      border-left: 4px solid #2196F3;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .instructions ol {
+      margin-left: 20px;
+      margin-top: 10px;
+    }
+
+    .instructions li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🧹 PWA Cleaner</h1>
+    <p class="subtitle">Clean old BreatheFree PWA data for fresh installation</p>
+
+    <div class="warning" style="background: #ffebee; border-color: #f44336; font-size: 1rem; padding: 20px;">
+      <strong style="color: #d32f2f; font-size: 1.1rem;">⚠️ CRITICAL: UNINSTALL OLD PWA APP FIRST!</strong><br><br>
+      Before using this cleaner, you MUST:<br>
+      <strong>1. Uninstall the installed PWA app from your device</strong><br>
+      &nbsp;&nbsp;&nbsp;• Desktop: chrome://apps → Right-click BreatheFree → Remove<br>
+      &nbsp;&nbsp;&nbsp;• Android: Long-press icon → Uninstall<br>
+      &nbsp;&nbsp;&nbsp;• iOS: Long-press icon → Remove App<br><br>
+      <strong>2. Close ALL browser tabs running BreatheFree</strong><br><br>
+      <strong>3. Then use this cleaner to clear cached data</strong>
+    </div>
+
+    <div class="warning">
+      ⚠️ <strong>Data Warning:</strong> This will clear all service workers, caches, and local storage for this domain. Your BreatheFree data will be lost unless you've exported it!
+    </div>
+
+    <button onclick="cleanAll()" id="cleanBtn">
+      Clear All PWA Data
+    </button>
+
+    <pre id="log"></pre>
+
+    <div class="instructions">
+      <strong>📋 After Cleaning:</strong>
+      <ol>
+        <li>Close this tab</li>
+        <li>Close ALL other tabs of BreatheFree</li>
+        <li>Close your browser completely</li>
+        <li>Reopen browser and go to <code>http://localhost:8080</code></li>
+        <li>Press <strong>Ctrl+F5</strong> (hard refresh)</li>
+        <li>Look for the Install button</li>
+      </ol>
+    </div>
+  </div>
+
+  <script>
+    async function cleanAll() {
+      const log = document.getElementById('log');
+      const btn = document.getElementById('cleanBtn');
+
+      log.classList.add('show');
+      log.textContent = '';
+      btn.disabled = true;
+      btn.textContent = 'Cleaning...';
+
+      function addLog(message, type = 'info') {
+        const prefix = type === 'success' ? '✓' : type === 'error' ? '✗' : '•';
+        const className = type;
+        const line = `${prefix} ${message}\n`;
+        log.textContent += line;
+        log.scrollTop = log.scrollHeight;
+      }
+
+      try {
+        addLog('Starting cleanup process...', 'info');
+        addLog('');
+
+        // 1. Unregister all service workers
+        addLog('Checking for service workers...');
+        if ('serviceWorker' in navigator) {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          if (registrations.length === 0) {
+            addLog('No service workers found', 'info');
+          } else {
+            for (const registration of registrations) {
+              await registration.unregister();
+              addLog(`Unregistered: ${registration.scope}`, 'success');
+            }
+          }
+        } else {
+          addLog('Service Worker not supported', 'info');
+        }
+        addLog('');
+
+        // 2. Clear all caches
+        addLog('Checking for caches...');
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          if (cacheNames.length === 0) {
+            addLog('No caches found', 'info');
+          } else {
+            for (const name of cacheNames) {
+              await caches.delete(name);
+              addLog(`Deleted cache: ${name}`, 'success');
+            }
+          }
+        } else {
+          addLog('Cache API not supported', 'info');
+        }
+        addLog('');
+
+        // 3. Clear IndexedDB
+        addLog('Checking for IndexedDB...');
+        if ('indexedDB' in window) {
+          const databases = await indexedDB.databases();
+          if (databases.length === 0) {
+            addLog('No IndexedDB databases found', 'info');
+          } else {
+            for (const db of databases) {
+              indexedDB.deleteDatabase(db.name);
+              addLog(`Deleted database: ${db.name}`, 'success');
+            }
+          }
+        }
+        addLog('');
+
+        // 4. Clear storage
+        addLog('Clearing local storage...');
+        const localStorageSize = localStorage.length;
+        localStorage.clear();
+        addLog(`Cleared ${localStorageSize} items from localStorage`, 'success');
+
+        addLog('Clearing session storage...');
+        const sessionStorageSize = sessionStorage.length;
+        sessionStorage.clear();
+        addLog(`Cleared ${sessionStorageSize} items from sessionStorage`, 'success');
+        addLog('');
+
+        // 5. Summary
+        addLog('════════════════════════════════════', 'success');
+        addLog('✅ ALL CLEANED SUCCESSFULLY!', 'success');
+        addLog('════════════════════════════════════', 'success');
+        addLog('');
+        addLog('Next steps:', 'info');
+        addLog('1. Close this tab', 'info');
+        addLog('2. Close ALL browser tabs', 'info');
+        addLog('3. Restart your browser', 'info');
+        addLog('4. Visit http://localhost:8080', 'info');
+        addLog('5. Press Ctrl+F5 to hard refresh', 'info');
+        addLog('');
+        addLog('Your PWA should now install cleanly!', 'success');
+
+        btn.textContent = '✓ Cleaned Successfully!';
+        btn.style.background = '#28a745';
+
+      } catch (error) {
+        addLog('', 'error');
+        addLog(`ERROR: ${error.message}`, 'error');
+        addLog('', 'error');
+        addLog('Try manually clearing in DevTools:', 'error');
+        addLog('F12 → Application → Clear Storage', 'error');
+
+        btn.textContent = 'Error - Try Again';
+        btn.disabled = false;
+        btn.style.background = '#dc3545';
+      }
+    }
+  </script>
+</body>
+</html>

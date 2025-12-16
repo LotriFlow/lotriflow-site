@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Prompt Test - BreatheFree</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: #000;
+      color: #0f0;
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 { color: #ff0; }
+    .section {
+      background: #111;
+      border: 2px solid #0f0;
+      padding: 15px;
+      margin: 15px 0;
+      border-radius: 8px;
+    }
+    button {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      margin: 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #0c0; }
+    #log {
+      background: #000;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      max-height: 400px;
+      overflow-y: auto;
+      font-size: 12px;
+    }
+    .success { color: #0f0; }
+    .error { color: #f00; }
+    .warning { color: #ff0; }
+    .info { color: #0af; }
+  </style>
+</head>
+<body>
+  <h1>🧪 PWA Install Prompt Test</h1>
+
+  <div class="section">
+    <h2>Status</h2>
+    <p id="status">Waiting for beforeinstallprompt event...</p>
+    <button onclick="clearPWADismissed()">Clear "Dismissed" Flag</button>
+    <button onclick="testInstall()">Try Install</button>
+    <button onclick="location.href='breathefree-timer.html'">Go to Main App</button>
+  </div>
+
+  <div class="section">
+    <h2>Event Log</h2>
+    <button onclick="clearLog()">Clear Log</button>
+    <div id="log"></div>
+  </div>
+
+  <script>
+    const logEl = document.getElementById('log');
+    const statusEl = document.getElementById('status');
+    let deferredPrompt = null;
+
+    function addLog(message, type = 'info') {
+      const line = document.createElement('div');
+      line.className = type;
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logEl.appendChild(line);
+      logEl.scrollTop = logEl.scrollHeight;
+      console.log(message);
+    }
+
+    function clearLog() {
+      logEl.innerHTML = '';
+    }
+
+    function clearPWADismissed() {
+      localStorage.removeItem('pwa_dismissed');
+      addLog('✅ Cleared pwa_dismissed from localStorage', 'success');
+      addLog('ℹ️  Reload the page to test prompt again', 'info');
+    }
+
+    // Monitor beforeinstallprompt
+    window.addEventListener('beforeinstallprompt', (e) => {
+      addLog('🎉 beforeinstallprompt EVENT FIRED!', 'success');
+      e.preventDefault();
+      deferredPrompt = e;
+      statusEl.innerHTML = '<span style="color: #0f0;">✅ Install prompt is READY! Click "Try Install" button.</span>';
+      addLog('✅ Install prompt captured successfully', 'success');
+      addLog('ℹ️  Prompt details: ' + JSON.stringify({
+        platforms: e.platforms || 'unknown',
+        userChoice: typeof e.userChoice
+      }), 'info');
+    });
+
+    // Monitor appinstalled
+    window.addEventListener('appinstalled', () => {
+      addLog('🎉 App was INSTALLED!', 'success');
+      statusEl.innerHTML = '<span style="color: #0f0;">✅ App successfully installed!</span>';
+      deferredPrompt = null;
+    });
+
+    // Try install
+    async function testInstall() {
+      addLog('⚡ testInstall() called', 'info');
+
+      if (!deferredPrompt) {
+        addLog('❌ No deferred prompt available', 'error');
+        addLog('⚠️  This means beforeinstallprompt did NOT fire', 'warning');
+        addLog('ℹ️  Possible reasons:', 'info');
+        addLog('  1. PWA criteria not met (check manifest/icons/SW)', 'info');
+        addLog('  2. App is already installed', 'info');
+        addLog('  3. User previously dismissed install prompt', 'info');
+        addLog('  4. Browser doesn\'t support installation', 'info');
+
+        // Try Edge-specific method
+        addLog('ℹ️  Try using Edge menu → Apps → Install', 'info');
+        return;
+      }
+
+      try {
+        addLog('📢 Showing install prompt...', 'info');
+        deferredPrompt.prompt();
+
+        const { outcome } = await deferredPrompt.userChoice;
+        addLog(`✅ User choice: ${outcome}`, outcome === 'accepted' ? 'success' : 'warning');
+
+        if (outcome === 'accepted') {
+          addLog('🎉 User ACCEPTED installation!', 'success');
+        } else {
+          addLog('⚠️  User DISMISSED installation', 'warning');
+        }
+
+        deferredPrompt = null;
+      } catch (err) {
+        addLog(`❌ Error: ${err.message}`, 'error');
+      }
+    }
+
+    // Check criteria
+    setTimeout(() => {
+      addLog('🔍 Checking PWA criteria...', 'info');
+
+      const checks = {
+        https: location.protocol === 'https:' || location.hostname === 'localhost',
+        serviceWorker: 'serviceWorker' in navigator,
+        manifest: !!document.querySelector('link[rel="manifest"]'),
+        beforeinstallprompt: 'onbeforeinstallprompt' in window,
+      };
+
+      addLog(`  HTTPS/localhost: ${checks.https ? '✅' : '❌'}`, checks.https ? 'success' : 'error');
+      addLog(`  Service Worker API: ${checks.serviceWorker ? '✅' : '❌'}`, checks.serviceWorker ? 'success' : 'error');
+      addLog(`  Manifest link: ${checks.manifest ? '✅' : '❌'}`, checks.manifest ? 'success' : 'error');
+      addLog(`  beforeinstallprompt support: ${checks.beforeinstallprompt ? '✅' : '❌'}`, checks.beforeinstallprompt ? 'success' : 'error');
+
+      const wasDismissed = localStorage.getItem('pwa_dismissed');
+      if (wasDismissed) {
+        addLog(`⚠️  pwa_dismissed flag is SET in localStorage`, 'warning');
+        addLog(`ℹ️  Click "Clear Dismissed Flag" to reset`, 'info');
+      } else {
+        addLog(`✅ pwa_dismissed flag is NOT set`, 'success');
+      }
+
+      // Register service worker
+      if (checks.serviceWorker) {
+        addLog('📝 Registering service worker...', 'info');
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => {
+            addLog(`✅ Service worker registered: ${reg.scope}`, 'success');
+          })
+          .catch(err => {
+            addLog(`❌ Service worker error: ${err.message}`, 'error');
+          });
+      }
+    }, 500);
+
+    // Wait for prompt
+    setTimeout(() => {
+      if (!deferredPrompt) {
+        addLog('⚠️  beforeinstallprompt did NOT fire after 5 seconds', 'warning');
+        addLog('ℹ️  Check DevTools Console for errors', 'info');
+        addLog('ℹ️  Check Edge DevTools → Application → Manifest', 'info');
+        statusEl.innerHTML = '<span style="color: #ff0;">⚠️ Prompt not available. Use Edge menu → Apps → Install</span>';
+      }
+    }, 5000);
+
+    addLog('🚀 Test page loaded', 'info');
+    addLog('ℹ️  Waiting for beforeinstallprompt event...', 'info');
+  </script>
+</body>
+</html>

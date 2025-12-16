@@ -1,0 +1,1721 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#38bdf8" />
+    <meta
+      name="description"
+      content="LotriFlow Quit - Quit smoking with LotriFlow. Track your smoke-free journey."
+    />
+
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-title" content="LotriFlow Quit" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="LotriFlow Quit" />
+    <meta name="msapplication-TileColor" content="#0a0a0f" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <title>LotriFlow Quit - Quit Smoking</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512x512.png" />
+    <link rel="shortcut icon" href="assets/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192x192.png" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="src/styles.css?v=7" />
+    <link rel="stylesheet" href="milestone-styles.css" />
+  </head>
+  <body>
+    <div class="offline-banner" id="offlineBanner">
+      📴 You're offline - Changes will sync when connected
+    </div>
+    <div class="bg-animation"></div>
+    <div class="breath-circle"></div>
+    <div class="breath-circle"></div>
+    <div class="breath-circle"></div>
+
+    <div class="app-container">
+      <!-- Header -->
+      <header class="header">
+        <div class="logo"><span class="logo-text">Quit Smoking</span></div>
+        <div class="header-controls">
+          <button
+            class="header-btn"
+            id="themeBtn"
+            onclick="toggleTheme()"
+            title="Toggle Theme"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </button>
+          <button
+            class="header-btn"
+            id="settingsBtn"
+            onclick="toggleSettings()"
+            title="Settings"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- Timer Display -->
+      <div class="timer-display" id="timerDisplay">
+        <button
+          class="timer-maximize-btn"
+          id="maximizeIcon"
+          onclick="toggleTimerMaximize()"
+        >
+          ⛶
+        </button>
+        <div class="timer-label">
+          <span class="dot"></span>
+          <span>SMOKE FREE</span>
+        </div>
+        <div class="timer-digits" id="timerDigits">
+          <span class="time-segment"
+            ><span class="value" id="days">0</span
+            ><span class="unit">d</span></span
+          >
+          <span class="time-segment"
+            ><span class="value" id="hours">00</span
+            ><span class="unit">h</span></span
+          >
+          <span class="time-segment"
+            ><span class="value" id="minutes">00</span
+            ><span class="unit">m</span></span
+          >
+          <span class="time-segment"
+            ><span class="value" id="seconds">00</span
+            ><span class="unit">s</span></span
+          >
+        </div>
+        <div class="timer-subtext" id="timerSubtext">
+          Your body is already healing 💪
+        </div>
+      </div>
+
+      <!-- Timer Maximize Overlay -->
+      <div
+        class="timer-overlay"
+        id="timerOverlay"
+        onclick="toggleTimerMaximize()"
+      ></div>
+
+      <!-- Progress Ring -->
+      <div class="progress-container">
+        <div class="progress-ring">
+          <svg width="150" height="150">
+            <circle class="progress-ring-bg" cx="75" cy="75" r="65" />
+            <circle
+              class="progress-ring-fill"
+              id="progressRing"
+              cx="75"
+              cy="75"
+              r="65"
+            />
+          </svg>
+          <div class="progress-center">
+            <div class="progress-percent" id="progressPercent">0%</div>
+            <div class="progress-label" id="progressLabel">to goal</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn btn-primary" onclick="logCigarette()">
+          <span class="btn-icon">📝</span>
+          <span id="smokeBtnText">Log Cigarette</span>
+        </button>
+        <button class="btn btn-secondary" onclick="showSection('coach')">
+          <span class="btn-icon">💪</span>
+          <span>Need Help?</span>
+        </button>
+      </div>
+
+      <div class="stat-card highlight" id="quitPlanCard" style="margin-top: 12px">
+        <div class="stat-icon">📅</div>
+        <div class="stat-value" id="quitPlanHeadline">Set your quit date</div>
+        <div class="stat-label" id="quitPlanDetail">
+          Choose a target date to get a tailored plan.
+        </div>
+        <div style="margin-top: 8px">
+          <button class="btn btn-secondary btn-tiny" id="quitPlanButton" onclick="showQuitPlan()">
+            View plan
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Grid -->
+      <div class="stats-grid">
+        <div class="stat-card highlight">
+          <div class="stat-icon">💰</div>
+          <div class="stat-value" id="moneySaved">$0.00</div>
+          <div class="stat-label">Money Saved</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🚬</div>
+          <div class="stat-value" id="cigarettesAvoided">0</div>
+          <div class="stat-label">Avoided</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🔥</div>
+          <div class="stat-value" id="smokeFreeStreak">0</div>
+          <div class="stat-label">Day Streak</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏱️</div>
+          <div class="stat-value" id="avgInterval">--</div>
+          <div class="stat-label">Avg Interval</div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-tabs">
+        <button
+          class="nav-tab active pro-nav-feature"
+          data-pro-feature-name="Advanced Reports & Analytics"
+          onclick="showSection('reports')"
+        >
+          <span class="nav-tab-icon"><img src="assets/icons/bar-chart.svg" alt="" /></span>
+          <span>Reports</span>
+        </button>
+        <button class="nav-tab" onclick="showSection('achievements')">
+          <span class="nav-tab-icon"><img src="assets/icons/heart.svg" alt="" /></span>
+          <span>Badges</span>
+        </button>
+        <button class="nav-tab" onclick="showSection('coach')">
+          <span class="nav-tab-icon"><img src="assets/icons/chat.svg" alt="" /></span>
+          <span>Coach</span>
+        </button>
+        <button class="nav-tab" onclick="showSection('milestones')">
+          <span class="nav-tab-icon"><img src="assets/icons/pulse.svg" alt="" /></span>
+          <span>Health</span>
+        </button>
+      </div>
+
+      <!-- Reports Section -->
+      <div class="section pro-feature active" id="reportsSection" data-pro-feature-name="Advanced Reports & Analytics">
+        <!-- Progression Metrics -->
+        <div class="progression-metrics">
+          <div class="metric-card">
+            <div class="metric-label">🚬 Total Smoked</div>
+            <div class="metric-value" id="totalSmoked">0</div>
+            <div class="metric-subtext" id="smokedSinceStart">since start</div>
+          </div>
+
+          <div class="metric-card">
+            <div class="metric-label">✅ Avoided</div>
+            <div class="metric-value" id="totalAvoided">0</div>
+            <div class="metric-subtext" id="avoidedPercentage">
+              tracking against your limit
+            </div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="chart-header">
+            <div class="chart-title">Daily Cigarettes</div>
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="legend-color legend-zero"></div>
+                <span>Zero</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color legend-under"></div>
+                <span>Under</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color legend-over"></div>
+                <span>Over</span>
+              </div>
+            </div>
+          </div>
+          <div class="bar-chart" id="barChart"></div>
+        </div>
+        <div class="summary-row">
+          <div class="summary-card">
+            <div class="summary-value" id="reportTotal">0</div>
+            <div class="summary-label">Total</div>
+          </div>
+          <div class="summary-card">
+            <div class="summary-value" id="reportAvg">0</div>
+            <div class="summary-label">Daily Avg</div>
+          </div>
+        </div>
+        <button
+          class="btn btn-secondary pro-feature"
+          data-pro-feature-name="Share Progress"
+          style="width: 100%; margin-top: 12px; position: relative; overflow: hidden;"
+          onclick="showShareModal()"
+        >
+          📤 Share Progress <span class="pro-badge-inline">PRO</span>
+        </button>
+      </div>
+
+      <!-- Achievements Section -->
+      <div class="section" id="achievementsSection">
+        <div class="section-title">🏆 Your Achievements</div>
+
+        <!-- Badge Progress Stats -->
+        <div class="badge-stats">
+          <div class="badge-stat-card">
+            <div class="badge-stat-value" id="badgesUnlocked">0</div>
+            <div class="badge-stat-label">Unlocked</div>
+          </div>
+
+          <div class="badge-stat-card">
+            <div class="badge-stat-value" id="badgesTotal">15</div>
+            <div class="badge-stat-label">Total</div>
+          </div>
+
+          <div class="badge-stat-card">
+            <div class="badge-stat-value" id="badgesPercent">0%</div>
+            <div class="badge-stat-label">Complete</div>
+          </div>
+        </div>
+
+        <!-- Next Badge -->
+        <div class="next-badge-card" id="nextBadgeCard">
+          <div class="next-badge-header">🎯 Next Badge</div>
+          <div class="next-badge-content">
+            <div class="next-badge-icon" id="nextBadgeIcon">🏆</div>
+            <div class="next-badge-info">
+              <div class="next-badge-title" id="nextBadgeTitle">First Hour</div>
+              <div class="next-badge-progress" id="nextBadgeProgress">
+                45 minutes to go
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="achievements-grid" id="achievementsGrid"></div>
+      </div>
+
+      <!-- Coach Section -->
+      <div class="section" id="coachSection">
+        <div class="coach-card">
+          <div class="coach-header">
+            <div class="coach-avatar">💚</div>
+            <div>
+              <div class="coach-name">Your Coach</div>
+              <div class="coach-status" id="coachStatus">
+                Here to support you
+              </div>
+            </div>
+          </div>
+
+          <div class="coach-message" id="coachMessage">
+            💚 Welcome! I'm your personal quit coach. I'll give you contextual
+            guidance based on where you are in your journey. Check back often
+            for personalized support!
+          </div>
+
+          <!-- AI Chat Input -->
+          <div
+            class="coach-chat-input"
+            style="margin: 16px 0 0 0; display: none"
+          >
+            <input
+              type="text"
+              id="coachChatInput"
+              placeholder="Ask me anything... (e.g., 'How do I handle cravings?')"
+              style="
+                width: 100%;
+                padding: 12px;
+                background: var(--bg-secondary);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-family: 'Inter', sans-serif;
+                font-size: 0.9rem;
+              "
+              onkeypress="if(event.key==='Enter') askAICoach()"
+            />
+            <button
+              class="btn"
+              onclick="askAICoach()"
+              style="margin-top: 8px; width: 100%"
+            >
+              💬 Ask Coach
+            </button>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="coach-quick-actions">
+            <button class="btn btn-primary" onclick="showBreathingSelector()">
+              🫁 Start Breathing Exercise
+            </button>
+          </div>
+        </div>
+
+        <div class="motivation-card">
+          <div class="motivation-quote" id="quote">
+            "Every cigarette you don't smoke is a victory."
+          </div>
+          <div class="motivation-author" id="quoteAuthor">
+            — Your Future Self
+          </div>
+        </div>
+      </div>
+
+      <!-- Milestones Section -->
+      <div class="section" id="milestonesSection">
+        <div class="section-title">🎯 Health Recovery Timeline</div>
+        <div id="milestonesList"></div>
+      </div>
+    </div>
+
+    <!-- Install Banner -->
+    <div class="install-banner" id="installBanner">
+      <span class="install-banner-icon">📲</span>
+      <div class="install-banner-text">
+        <div class="install-banner-title">Install LotriFlow Quit</div>
+        <div class="install-banner-desc">
+          Add to home screen for the best experience
+        </div>
+      </div>
+      <button class="install-banner-btn" onclick="installPWA()">Install</button>
+      <button class="install-banner-close" onclick="dismissInstallBanner()">
+        ×
+      </button>
+    </div>
+
+    <!-- Settings Panel -->
+    <div
+      class="settings-overlay"
+      id="settingsOverlay"
+      onclick="toggleSettings()"
+    ></div>
+    <div class="settings-panel" id="settingsPanel">
+      <div class="settings-header">
+        <h2 class="settings-title"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h.09a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h.09a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v.09a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> Settings</h2>
+        <button class="close-btn" onclick="toggleSettings()">×</button>
+      </div>
+      <div class="settings-content">
+        <div class="settings-accordion open" id="proAccordion">
+          <div class="accordion-header" onclick="toggleAccordion('proAccordion')">
+            <span>Pro & Billing</span>
+            <span class="accordion-meta" id="proAccordionMeta"></span>
+            <span class="accordion-icon">⌄</span>
+          </div>
+          <div class="accordion-body">
+            <div class="setting-group" id="proAccessSection">
+              <div class="setting-group-title">LotriFlow Quit Pro</div>
+
+              <div id="proActiveCard" class="u-hidden">
+                <div class="pro-card pro-card-active">
+                  <div class="u-flex-center-12 u-mb-8">
+                    <span class="u-fs-2rem">👑</span>
+                    <div>
+                      <div class="u-fw-700 u-fs-1-1">Pro Member</div>
+                      <div id="proStatusText" class="u-fs-0.85 u-opacity-95"></div>
+                    </div>
+                  </div>
+                  <div class="u-fs-0.85 u-opacity-90 u-mt-8">
+                    Thank you for supporting LotriFlow Quit! 💙
+                  </div>
+                </div>
+                <button id="restoreActiveBtn" onclick="ProAccess.restore()" class="btn btn-secondary u-w-full u-mb-8 u-btn-strong">
+                  🔄 Restore Purchases
+                </button>
+              </div>
+
+              <div id="proInactiveCard">
+                <div class="pro-card">
+                  <div class="u-flex-center-12 u-mb-12">
+                    <span class="u-fs-2rem">✨</span>
+                    <div class="u-fw-700 u-fs-1-2">Unlock Pro Features</div>
+                  </div>
+                  <ul class="u-list-reset u-mb-16 u-fs-0.95 u-lh-1.8">
+                    <li class="u-mb-8">✓ Advanced Reports & Analytics</li>
+                    <li class="u-mb-8">✓ Craving Tracker & Pattern Analysis</li>
+                    <li class="u-mb-8">✓ Sync & Backup your data</li>
+                    <li class="u-mb-8">✓ Share your progress with friends</li>
+                    <li>✓ Support continued development</li>
+                  </ul>
+                  <div class="u-flex-gap-10 u-mb-12">
+                    <div onclick="ProAccess.purchaseLifetime()" class="pricing-option pricing-option-highlight u-flex-1 u-pointer u-relative">
+                      <div class="u-text-center u-pt-6 u-pb-4">
+                        <div class="u-fw-700 u-fs-1-0">Lifetime</div>
+                        <div class="u-fw-700 u-fs-1-2 u-color-accent-purple">$2.99</div>
+                        <div class="u-fs-0.75 u-opacity-80 u-mt-4">Pay once, Pro forever</div>
+                      </div>
+                    </div>
+                    <div onclick="ProAccess.purchaseMonthly()" class="pricing-option pricing-option-standard u-flex-1 u-pointer">
+                      <div class="u-text-center u-pt-6 u-pb-4">
+                        <div class="u-fw-700 u-fs-1-0">Monthly</div>
+                        <div class="u-fw-700 u-fs-1-2 u-color-accent-blue">$0.99<span class="u-fs-0.7 u-fw-600">/mo</span></div>
+                        <div class="u-fs-0.75 u-opacity-80 u-mt-4">7-day free trial • Cancel anytime</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="u-fs-0.85 u-opacity-85 u-mb-8">
+                    Already purchased? <a href="#" onclick="ProAccess.restore(); return false;" class="u-color-primary u-underline">Restore here</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal Disclaimers -->
+        <div class="setting-group">
+          <div class="setting-group-title">Legal & Disclaimers</div>
+          <div
+            style="
+              font-size: 0.8rem;
+              color: var(--text-secondary);
+              line-height: 1.4;
+              margin-bottom: 12px;
+            "
+          >
+            <strong>Important:</strong> LotriFlow Quit is not responsible
+            for any loss, harm, or outcomes from using this app. This is just a
+            tool and by no means guaranteed to help you stop smoking—it's
+            entirely your own choice and responsibility. Consult a healthcare
+            professional for quitting smoking. Not medical advice.
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap">
+            <span
+              onclick="showModal('termsModal')"
+              class="u-color-accent-blue u-no-underline u-fs-0-8 u-pointer u-flex-center-6"
+              >
+              <span class="setting-icon"><img src="assets/icons/calendar.svg" alt="" /></span>
+              <span>Terms of Service</span>
+            </span>
+            <span
+              onclick="showModal('privacyModal')"
+              class="u-color-accent-blue u-no-underline u-fs-0-8 u-pointer u-flex-center-6"
+              >
+              <span class="setting-icon"><img src="assets/icons/lock.svg" alt="" /></span>
+              <span>Privacy Policy</span>
+            </span>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-group-title">Goals</div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Target Interval</div>
+              <div class="setting-desc">Minutes between cigarettes</div>
+            </div>
+            <div class="number-input">
+              <button onclick="adjustInterval(-5)">−</button
+              ><span id="intervalDisplay">60m</span
+              ><button onclick="adjustInterval(5)">+</button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div><div class="setting-label">Daily Limit</div></div>
+            <div class="number-input">
+              <button onclick="adjustDailyLimit(-1)">−</button
+              ><span id="dailyLimitDisplay">10</span
+              ><button onclick="adjustDailyLimit(1)">+</button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Auto-Increase</div>
+              <div class="setting-desc">+5 min each successful day</div>
+            </div>
+            <label class="toggle"
+              ><input
+                type="checkbox"
+                id="autoIncrease"
+                onchange="saveSettings()" /><span class="toggle-slider"></span
+            ></label>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Quit Date</div>
+              <div class="setting-desc">Set your target quit day</div>
+            </div>
+            <input
+              type="date"
+              id="quitDateInput"
+              onchange="changeQuitDate()"
+              class="quit-date-input"
+            />
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-group-title">Cost</div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Currency</div>
+              <div class="setting-desc">Select your local currency</div>
+            </div>
+            <select
+              id="currencySelect"
+              onchange="changeCurrency()"
+              style="
+                padding: 8px 12px;
+                background: var(--bg-card-hover);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                color: var(--text-primary);
+                font-family: 'Inter', sans-serif;
+                font-size: 0.85rem;
+                cursor: pointer;
+              "
+            >
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+              <option value="GBP">GBP (£)</option>
+              <option value="JPY">JPY (¥)</option>
+              <option value="AUD">AUD (A$)</option>
+              <option value="CAD">CAD (C$)</option>
+              <option value="CHF">CHF</option>
+              <option value="CNY">CNY (¥)</option>
+              <option value="INR">INR (₹)</option>
+              <option value="RUB">RUB (₽)</option>
+              <option value="BRL">BRL (R$)</option>
+              <option value="ZAR">ZAR (R)</option>
+              <option value="MXN">MXN ($)</option>
+              <option value="KRW">KRW (₩)</option>
+              <option value="TRY">TRY (₺)</option>
+              <option value="PLN">PLN (zł)</option>
+              <option value="THB">THB (฿)</option>
+              <option value="IDR">IDR (Rp)</option>
+              <option value="MYR">MYR (RM)</option>
+              <option value="PHP">PHP (₱)</option>
+              <option value="VND">VND (₫)</option>
+              <option value="AED">AED</option>
+              <option value="SAR">SAR</option>
+              <option value="EGP">EGP (E£)</option>
+              <option value="NGN">NGN (₦)</option>
+            </select>
+          </div>
+          <div class="setting-item">
+            <div><div class="setting-label">Pack Price</div></div>
+            <div class="number-input">
+              <button onclick="adjustPackPrice(-0.5)">−</button
+              ><span id="packPriceDisplay">$8.00</span
+              ><button onclick="adjustPackPrice(0.5)">+</button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <div><div class="setting-label">Cigs per Pack</div></div>
+            <div class="number-input">
+              <button onclick="adjustCigsPerPack(-1)">−</button
+              ><span id="cigsPerPackDisplay">20</span
+              ><button onclick="adjustCigsPerPack(1)">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-group-title">Notifications</div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Push Notifications</div>
+              <div class="setting-desc">Get reminded when you can smoke</div>
+            </div>
+            <label class="toggle"
+              ><input
+                type="checkbox"
+                id="notificationsEnabled"
+                onchange="toggleNotifications()" /><span
+                class="toggle-slider"
+              ></span
+            ></label>
+          </div>
+          <div class="setting-item">
+            <div><div class="setting-label">Sound</div></div>
+            <label class="toggle"
+              ><input
+                type="checkbox"
+                id="soundEnabled"
+                checked
+                onchange="saveSettings()" /><span class="toggle-slider"></span
+            ></label>
+            <button class="btn btn-secondary" style="margin-left: 12px" onclick="testSound()">
+              Test
+            </button>
+          </div>
+          <div class="setting-item">
+            <div><div class="setting-label">Vibration</div></div>
+            <label class="toggle"
+              ><input
+                type="checkbox"
+                id="vibrationEnabled"
+                checked
+                onchange="saveSettings()" /><span class="toggle-slider"></span
+            ></label>
+          </div>
+        </div>
+
+        <div class="setting-group" style="display: none">
+          <div class="setting-group-title">Coach</div>
+          <div
+            class="setting-item"
+            style="
+              flex-direction: column;
+              align-items: flex-start;
+              background: rgba(0, 255, 136, 0.05);
+              padding: 16px;
+              border-radius: 12px;
+              border: 1px solid rgba(0, 255, 136, 0.2);
+            "
+          >
+            <div
+              class="setting-label"
+              style="display: flex; align-items: center; gap: 8px"
+            >
+              <span>✨</span>
+              <span>Coach Status</span>
+            </div>
+            <div
+              id="llmStatus"
+              style="
+                font-size: 0.85rem;
+                color: var(--accent-green);
+                margin-top: 8px;
+                font-weight: 500;
+              "
+            >
+              ✅ Smart AI enabled (no API key needed!)
+            </div>
+            <div
+              style="
+                font-size: 0.75rem;
+                color: var(--text-secondary);
+                margin-top: 4px;
+                line-height: 1.4;
+              "
+            >
+              Coach uses context-aware motivational messages. Works 100%
+              offline!
+            </div>
+          </div>
+
+          <div class="setting-item" style="opacity: 0.6">
+            <div>
+              <div class="setting-label">🔬 Advanced: External LLM API</div>
+              <div class="setting-desc" style="font-size: 0.75rem">
+                Optional - use HuggingFace for varied responses
+              </div>
+            </div>
+            <label class="toggle">
+              <input id="llmEnabled" type="checkbox" onchange="toggleLLM()" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <div
+            class="setting-item"
+            id="llmApiKeySection"
+            style="
+              display: none;
+              flex-direction: column;
+              align-items: flex-start;
+              background: rgba(255, 149, 0, 0.05);
+              padding: 12px;
+              border-radius: 8px;
+            "
+          >
+            <div style="width: 100%">
+              <div class="setting-label">HuggingFace API Key</div>
+              <div
+                class="setting-desc"
+                style="font-size: 0.75rem; margin-bottom: 8px"
+              >
+                <a
+                  href="https://huggingface.co/settings/tokens"
+                  target="_blank"
+                  style="color: var(--accent-green)"
+                >
+                  Get free API key →
+                </a>
+              </div>
+              <input
+                id="llmApiKey"
+                type="password"
+                placeholder="hf_..."
+                style="
+                  width: 100%;
+                  padding: 8px;
+                  background: var(--bg-card);
+                  border: 1px solid rgba(255, 255, 255, 0.1);
+                  border-radius: 8px;
+                  color: var(--text-primary);
+                  font-family: 'Inter', sans-serif;
+                  font-size: 0.9rem;
+                "
+                onchange="saveLLMApiKey()"
+              />
+              <button
+                class="btn btn-secondary"
+                style="
+                  margin-top: 8px;
+                  padding: 6px 12px;
+                  font-size: 0.85rem;
+                  width: auto;
+                "
+                onclick="testLLMConnection()"
+              >
+                Test API Connection
+              </button>
+              <div
+                id="llmApiStatus"
+                style="
+                  font-size: 0.75rem;
+                  color: var(--text-muted);
+                  margin-top: 6px;
+                "
+              >
+                Enter key and click Test
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-group pro-feature" data-pro-feature-name="Sync & Backup">
+          <div class="setting-group-title u-flex-center-8">
+            <span class="setting-icon"><img src="assets/icons/cloud.svg" alt="" /></span>
+            <span>Sync & Backup</span>
+          </div>
+          <div class="sync-section">
+            <div class="sync-summary u-flex-center-8">
+              <span class="setting-icon"><img src="assets/icons/cloud.svg" alt="" /></span>
+              <span>Your data stays on this device. Use these quick actions to move or back it up:</span>
+            </div>
+            <div class="sync-actions">
+              <button
+                class="btn btn-secondary btn-small"
+                onclick="generateShareCode()"
+              >
+                <span class="u-flex-center-6"><span class="setting-icon"><img src="assets/icons/upload.svg" alt="" /></span><span>Share Code</span></span>
+                <span class="sync-btn-desc">Device to device</span>
+              </button>
+              <button
+                class="btn btn-secondary btn-small"
+                onclick="showRestoreModal()"
+              >
+                <span class="u-flex-center-6"><span class="setting-icon"><img src="assets/icons/download.svg" alt="" /></span><span>Restore</span></span>
+                <span class="sync-btn-desc">Use a code</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="setting-group" id="installSection">
+          <div class="setting-group-title">Install App</div>
+          <div class="setting-item">
+            <div style="flex: 1">
+              <div class="setting-label">Add to Home Screen</div>
+              <div class="setting-desc">Works offline, like a native app</div>
+              <div
+                class="setting-desc"
+                style="margin-top: 8px; font-size: 0.7rem; opacity: 0.7"
+              >
+                <strong>Chrome:</strong> Look for install icon in address bar,
+                or use menu (⋮) → "Install LotriFlow Quit"<br />
+                <strong>iOS Safari:</strong> Tap Share → "Add to Home Screen"
+              </div>
+            </div>
+            <button class="btn btn-primary btn-tiny" onclick="installPWA()">
+              Install
+            </button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-group-title">Feedback & Support</div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Report a Bug</div>
+              <div class="setting-desc">Found an issue? Help us fix it</div>
+            </div>
+            <button
+              class="btn btn-secondary btn-tiny"
+              onclick="openBugReport()"
+            >
+              Report Bug
+            </button>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Request Feature</div>
+              <div class="setting-desc">
+                Suggest new features or improvements
+              </div>
+            </div>
+            <button
+              class="btn btn-secondary btn-tiny"
+              onclick="openFeatureRequest()"
+            >
+              New Feature
+            </button>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Help & FAQ</div>
+              <div class="setting-desc">Get help using the app</div>
+            </div>
+            <button class="btn btn-secondary btn-tiny" onclick="openHelp()">
+              Get Help
+            </button>
+          </div>
+          <div class="setting-item">
+            <div>
+              <div class="setting-label">Contact Support</div>
+              <div class="setting-desc">Email: me@lotriflow.com</div>
+            </div>
+            <button class="btn btn-secondary btn-tiny" onclick="openSupport()">
+              Send Email
+            </button>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-group-title">Danger Zone</div>
+          <div class="setting-item">
+            <div><div class="setting-label">Reset All Data</div></div>
+            <button class="btn btn-danger btn-tiny" onclick="resetProgress()">
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      <span class="toast-icon" aria-hidden="true"></span>
+      <span class="toast-message" id="toastMessage">Saved!</span>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="onboardingModal">
+      <div class="modal">
+        <div class="modal-title">Welcome to LotriFlow Quit 🌱</div>
+        <div class="modal-subtitle">Let's personalize your quit journey</div>
+        <div class="modal-input-group">
+          <label>Cigarettes per day?</label
+          ><input
+            type="number"
+            class="modal-input"
+            id="setupDailySmokes"
+            value="10"
+            min="1"
+            max="100"
+          />
+        </div>
+        <div class="modal-input-group">
+          <label>Target interval (minutes)?</label
+          ><input
+            type="number"
+            class="modal-input"
+            id="setupInterval"
+            value="60"
+            min="15"
+            max="480"
+          />
+        </div>
+        <div class="modal-input-group">
+          <label>Quit date</label
+          ><input
+            type="date"
+            class="modal-input"
+            id="setupQuitDate"
+          />
+        </div>
+        <div class="modal-input-group">
+          <label>Pack price?</label
+          ><input
+            type="number"
+            class="modal-input"
+            id="setupPackPrice"
+            value="8"
+            min="1"
+            max="50"
+            step="0.5"
+          />
+        </div>
+        <div class="agreement-section">
+          <div class="agreement-item">
+            <input type="checkbox" id="agreeTerms" />
+            <label for="agreeTerms">
+              I agree to the
+              <a href="#" onclick="showModal('termsModal')">Terms of Service</a>
+            </label>
+          </div>
+          <div class="agreement-item">
+            <input type="checkbox" id="agreePrivacy" />
+            <label for="agreePrivacy">
+              I agree to the
+              <a href="#" onclick="showModal('privacyModal')">Privacy Policy</a>
+            </label>
+          </div>
+        </div>
+        <button
+          class="btn btn-primary onboarding-start-btn"
+          onclick="completeOnboarding()"
+        >
+          Start My Journey
+        </button>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="restoreModal">
+      <div class="modal">
+        <div class="modal-title">Restore Data ☁️</div>
+        <div class="modal-subtitle">Enter your share code</div>
+        <div class="modal-input-group">
+          <input
+            type="text"
+            class="modal-input"
+            id="restoreCodeInput"
+            placeholder="Paste code here..."
+          />
+        </div>
+        <div style="display: flex; gap: 10px">
+          <button
+            class="btn btn-secondary"
+            style="flex: 1"
+            onclick="closeModal('restoreModal')"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn btn-primary"
+            style="flex: 1"
+            onclick="restoreFromCode()"
+          >
+            Restore
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="shareModal">
+      <div class="modal" style="max-width: 450px">
+        <div style="text-align: center; margin-bottom: 20px">
+          <div style="font-size: 3rem; margin-bottom: 8px">🎉</div>
+          <div class="modal-title" style="margin-bottom: 8px">
+            Share Your Progress
+          </div>
+          <div style="font-size: 0.85rem; color: var(--text-secondary)">
+            Celebrate your journey with others
+          </div>
+        </div>
+
+        <!-- Progress Card -->
+        <div
+          style="
+            background: linear-gradient(
+              135deg,
+              rgba(0, 255, 136, 0.1),
+              rgba(0, 163, 255, 0.1)
+            );
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+          "
+        >
+          <div
+            id="shareText"
+            style="
+              font-size: 1.1rem;
+              line-height: 1.6;
+              color: var(--text-primary);
+              font-weight: 600;
+            "
+          >
+            I've been smoke-free for 0 hours!
+          </div>
+          <div
+            id="shareStats"
+            style="
+              display: grid;
+              grid-template-columns: 1fr 1fr;
+              gap: 12px;
+              margin-top: 16px;
+              font-size: 0.85rem;
+            "
+          >
+            <div
+              style="
+                background: rgba(0, 0, 0, 0.2);
+                padding: 8px;
+                border-radius: 8px;
+              "
+            >
+              <div
+                style="
+                  color: var(--text-secondary);
+                  font-size: 0.7rem;
+                  margin-bottom: 4px;
+                "
+              >
+                Avoided
+              </div>
+              <div
+                id="shareAvoided"
+                style="font-weight: 700; color: var(--accent-green)"
+              >
+                0
+              </div>
+            </div>
+            <div
+              style="
+                background: rgba(0, 0, 0, 0.2);
+                padding: 8px;
+                border-radius: 8px;
+              "
+            >
+              <div
+                style="
+                  color: var(--text-secondary);
+                  font-size: 0.7rem;
+                  margin-bottom: 4px;
+                "
+              >
+                Saved
+              </div>
+              <div
+                id="shareSaved"
+                style="font-weight: 700; color: var(--accent-green)"
+              >
+                $0
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="share-buttons">
+          <button class="share-btn twitter" onclick="shareToTwitter()">
+            <span style="font-size: 1.2rem">𝕏</span> Twitter
+          </button>
+          <button class="share-btn facebook" onclick="shareToFacebook()">
+            <span style="font-size: 1.2rem">📘</span> Facebook
+          </button>
+          <button class="share-btn whatsapp" onclick="shareToWhatsApp()">
+            <span style="font-size: 1.2rem">💬</span> WhatsApp
+          </button>
+          <button class="share-btn copy" onclick="copyShareText()">
+            <span style="font-size: 1.2rem">📋</span> Copy
+          </button>
+        </div>
+        <button
+          class="btn btn-secondary"
+          style="width: 100%; margin-top: 16px"
+          onclick="closeModal('shareModal')"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="breathingModal">
+      <div class="modal breathing-modal">
+        <div class="modal-title breathing-modal-title" id="breathingTitle">🌬️ Breathing Exercise</div>
+        <div class="modal-subtitle breathing-modal-subtitle" id="breathingDescription">
+          Follow the breathing pattern
+        </div>
+        <div class="breathing-icon-container" id="breathingCircle">
+          😮‍💨
+        </div>
+        <div class="breathing-instruction" id="breathingInstruction">
+          Get Ready...
+        </div>
+        <div class="breathing-timer" id="breathingTimer">
+          4
+        </div>
+        <button class="btn btn-secondary breathing-close-btn" onclick="closeModal('breathingModal')">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <!-- Breathing Technique Selector Modal -->
+    <div class="modal-overlay" id="breathingSelectorModal">
+      <div class="modal">
+        <div class="modal-title">Choose Breathing Technique 🫁</div>
+        <div class="modal-subtitle" style="margin-bottom: 20px">
+          Select a technique to help manage cravings and stress
+        </div>
+
+        <div style="display: grid; gap: 12px; margin-bottom: 20px">
+          <button
+            class="breathing-technique-card"
+            onclick="selectBreathingTechnique('478')"
+          >
+            <div style="display: flex; align-items: center; gap: 12px">
+              <div style="font-size: 2rem">😮‍💨</div>
+              <div style="text-align: left; flex: 1">
+                <div
+                  style="font-weight: 600; font-size: 1rem; margin-bottom: 4px"
+                >
+                  4-7-8 Breathing
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary)">
+                  Signature 4-7-8 breathing exercise
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button
+            class="breathing-technique-card"
+            onclick="selectBreathingTechnique('box')"
+          >
+            <div style="display: flex; align-items: center; gap: 12px">
+              <div style="font-size: 2rem">⬜</div>
+              <div style="text-align: left; flex: 1">
+                <div
+                  style="font-weight: 600; font-size: 1rem; margin-bottom: 4px"
+                >
+                  Box Breathing
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary)">
+                  Common tactical breathing for stress control
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button
+            class="breathing-technique-card"
+            onclick="selectBreathingTechnique('alternate')"
+          >
+            <div style="display: flex; align-items: center; gap: 12px">
+              <div style="font-size: 2rem">🧘</div>
+              <div style="text-align: left; flex: 1">
+                <div
+                  style="font-weight: 600; font-size: 1rem; margin-bottom: 4px"
+                >
+                  Alternate Nostril
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary)">
+                  Balances energy and reduces anxiety
+                </div>
+              </div>
+            </div>
+          </button>
+
+          <button
+            class="breathing-technique-card"
+            onclick="selectBreathingTechnique('quick')"
+          >
+            <div style="display: flex; align-items: center; gap: 12px">
+              <div style="font-size: 2rem">⚡</div>
+              <div style="text-align: left; flex: 1">
+                <div
+                  style="font-weight: 600; font-size: 1rem; margin-bottom: 4px"
+                >
+                  Quick Reset
+                </div>
+                <div style="font-size: 0.8rem; color: var(--text-secondary)">
+                  Fast stress relief for intense moments
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+
+        <button
+          class="btn btn-secondary"
+          style="width: 100%"
+          onclick="closeModal('breathingSelectorModal')"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+
+    <!-- Quit Plan Modal -->
+    <div class="modal-overlay" id="quitPlanModal">
+      <div class="modal" style="max-width: 520px; max-height: 80vh; overflow-y: auto">
+        <div class="modal-title">
+          Your Quit Plan
+          <button class="close-btn" onclick="closeModal('quitPlanModal')" style="font-size: 1.2rem; padding: 5px">
+            ×
+          </button>
+        </div>
+        <div style="margin-bottom: 10px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap;">
+          <div style="font-weight: 600;">Schedule view:</div>
+          <select id="quitPlanGranularity" onchange="changeQuitPlanGranularity()" style="padding: 6px 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: var(--bg-card); color: var(--text-primary);">
+            <option value="key">Key milestones</option>
+            <option value="every2">Every 2 days</option>
+            <option value="daily">Daily</option>
+          </select>
+        </div>
+        <div class="modal-subtitle" id="quitPlanSubtitle" style="margin-bottom: 12px">
+          Countdown to your quit date.
+        </div>
+        <div id="quitPlanSummary" style="margin-bottom: 12px; line-height: 1.5;"></div>
+        <ul id="quitPlanSteps" style="padding-left: 18px; line-height: 1.5"></ul>
+        <div style="display: flex; justify-content: flex-end; margin-top: 16px">
+          <button class="btn btn-secondary" onclick="closeModal('quitPlanModal')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Crisis Support Modal -->
+    <div class="modal-overlay" id="crisisModal">
+      <div class="modal">
+        <div class="modal-title" id="crisisTitle">Crisis Support Resources</div>
+        <div class="modal-subtitle" id="crisisMessage">
+          If you're struggling right now, remember you're not alone.
+        </div>
+        <ul id="crisisResources">
+          <!-- Resources will be populated by JavaScript -->
+        </ul>
+        <div class="crisis-modal-buttons">
+          <button class="btn btn-secondary" onclick="closeModal('crisisModal')">
+            Close
+          </button>
+          <button class="btn" onclick="showBreathingSelector()">
+            Start Breathing Exercise
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Log Cigarette Confirmation Modal -->
+    <div class="modal-overlay" id="smokeConfirmModal">
+      <div class="modal">
+        <div class="modal-title" id="smokeConfirmTitle">Log a cigarette?</div>
+        <div class="modal-subtitle" id="smokeConfirmMessage">
+          Logging will reset your timer.
+        </div>
+        <div style="display: flex; gap: 10px; margin-top: 16px; justify-content: flex-end">
+          <button class="btn btn-secondary" onclick="cancelLogCigarette()">
+            Cancel
+          </button>
+          <button class="btn btn-danger" id="smokeConfirmPrimary" onclick="confirmLogCigarette()">
+            Log cigarette
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div class="modal-overlay" id="termsModal">
+      <div
+        class="modal"
+        style="max-width: 600px; max-height: 80vh; overflow-y: auto"
+      >
+        <div class="modal-title">
+          Terms of Service
+          <button
+            class="close-btn"
+            onclick="closeModal('termsModal')"
+            style="font-size: 1.2rem; padding: 5px"
+          >
+            ×
+          </button>
+        </div>
+        <div
+          style="
+            padding: 20px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+          "
+        >
+          <h2
+            style="
+              color: var(--accent-blue);
+              font-size: 1.2rem;
+              font-weight: 600;
+              margin-bottom: 10px;
+              margin-top: 0;
+            "
+          >
+            Terms of Service for LotriFlow Quit
+          </h2>
+          <p style="margin-bottom: 20px">
+            <strong>Last Updated:</strong> November 29, 2025
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            1. Acceptance of Terms
+          </h3>
+          <p>
+            By using LotriFlow Quit ("the App"), you agree to these Terms
+            of Service. If you do not agree, please do not use the App.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            2. Description of Service
+          </h3>
+          <p>
+            LotriFlow Quit is a personal tool designed to help users track
+            their quit-smoking journey. It is not medical advice, treatment, or
+            a guaranteed method to stop smoking.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            3. No Medical Advice
+          </h3>
+          <p>
+            The App is for informational purposes only. It does not provide
+            medical, psychological, or professional advice. Quitting smoking can
+            have serious health implications. Consult a healthcare professional
+            before making any changes to your health habits.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            4. User Responsibility
+          </h3>
+          <p>
+            You are solely responsible for your use of the App and any decisions
+            related to quitting smoking. The App does not guarantee success, and
+            results may vary. Use of the App is entirely at your own risk.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            5. Limitation of Liability
+          </h3>
+          <p>
+            lotriflow and its developers are not responsible for any loss,
+            damage, or harm resulting from your use of the App, including but
+            not limited to health issues, addiction relapse, or any other
+            consequences. The App is provided "as is" without warranties of any
+            kind.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            6. Data Privacy
+          </h3>
+          <p>
+            Your data is stored locally on your device. We do not collect,
+            store, or share personal data. See our Privacy Policy for more
+            details.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            7. Changes to Terms
+          </h3>
+          <p>
+            We may update these terms at any time. Continued use of the App
+            constitutes acceptance of the updated terms.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            8. Contact
+          </h3>
+          <p>
+            For questions, contact us at me@lotriflow.com or open an issue on
+            our GitHub repository.
+          </p>
+
+          <p>© 2025 lotriflow. All rights reserved.</p>
+        </div>
+        <div class="modal-buttons">
+          <button
+            class="btn btn-secondary"
+            onclick="closeModal('termsModal')"
+            style="font-size: 0.8rem; padding: 8px 16px"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div class="modal-overlay" id="privacyModal">
+      <div
+        class="modal"
+        style="max-width: 600px; max-height: 80vh; overflow-y: auto"
+      >
+        <div class="modal-title">
+          Privacy Policy
+          <button
+            class="close-btn"
+            onclick="closeModal('privacyModal')"
+            style="font-size: 1.2rem; padding: 5px"
+          >
+            ×
+          </button>
+        </div>
+        <div
+          style="
+            padding: 20px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+          "
+        >
+          <h2
+            style="
+              color: var(--accent-blue);
+              font-size: 1.2rem;
+              font-weight: 600;
+              margin-bottom: 10px;
+              margin-top: 0;
+            "
+          >
+            Privacy Policy for LotriFlow Quit
+          </h2>
+          <p style="margin-bottom: 20px">
+            <strong>Last Updated:</strong> November 29, 2025
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            1. Information We Collect
+          </h3>
+          <p>
+            We do not collect, store, or transmit any personal information. All
+            data (such as quit dates, milestones, and preferences) is stored
+            locally on your device using browser storage or Capacitor
+            Preferences.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            2. How We Use Information
+          </h3>
+          <p>
+            Data is used solely for the App's functionality on your device. We
+            do not access, analyze, or share your data.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            3. Data Sharing
+          </h3>
+          <p>
+            We do not share, sell, or disclose your data to third parties. Your
+            information remains private and on-device.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            4. Data Security
+          </h3>
+          <p>
+            Since data is stored locally, security depends on your device's
+            protection. We recommend using device security features.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            5. Children's Privacy
+          </h3>
+          <p>
+            This App is not intended for children under 13. We do not knowingly
+            collect data from minors.
+          </p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            6. Changes to This Policy
+          </h3>
+          <p>We may update this policy. Check back periodically for changes.</p>
+
+          <h3
+            style="
+              font-size: 1rem;
+              font-weight: 500;
+              margin-bottom: 8px;
+              margin-top: 20px;
+            "
+          >
+            7. Contact Us
+          </h3>
+          <p>
+            For privacy questions, contact us at me@lotriflow.com or open an
+            issue on our GitHub repository. website.
+          </p>
+
+          <p>© 2025 lotriflow. All rights reserved.</p>
+        </div>
+        <div class="modal-buttons">
+          <button
+            class="btn btn-secondary"
+            onclick="closeModal('privacyModal')"
+            style="font-size: 0.8rem; padding: 8px 16px"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reset Confirmation Modal -->
+    <div class="modal-overlay" id="resetModal">
+      <div class="modal reset-modal" style="max-width: 440px">
+        <div class="reset-header">
+          <div class="reset-icon">!</div>
+          <div>
+            <div class="modal-title reset-title">Nuclear Reset</div>
+            <div class="reset-subtitle">
+              This will permanently delete <strong>ALL</strong> your data:
+            </div>
+          </div>
+        </div>
+
+        <ul class="reset-list">
+          <li><span class="reset-dot"></span><span>All cigarette logs</span></li>
+          <li><span class="reset-dot"></span><span>All achievements & badges</span></li>
+          <li><span class="reset-dot"></span><span>Progress statistics</span></li>
+          <li><span class="reset-dot"></span><span>Settings & preferences</span></li>
+          <li><span class="reset-dot"></span><span>Streak & milestones</span></li>
+        </ul>
+
+        <div class="reset-input-card">
+          <div class="reset-label">Type RESET to confirm</div>
+          <input
+            type="text"
+            id="resetConfirmInput"
+            class="reset-input"
+            placeholder="Type RESET in all caps"
+            onkeyup="if(event.key==='Enter' && this.value==='RESET') confirmReset()"
+          />
+        </div>
+
+        <div class="reset-actions">
+          <button
+            class="btn btn-secondary"
+            onclick="closeModal('resetModal'); document.getElementById('resetConfirmInput').value = '';"
+          >
+            Cancel
+          </button>
+          <button
+            class="btn btn-danger"
+            onclick="confirmReset()"
+          >
+            Reset Everything
+          </button>
+        </div>
+
+        <div class="reset-warning">
+          ⚡ This action cannot be undone
+        </div>
+      </div>
+    </div>
+
+    <!-- Capacitor Core (automatically included when built with Capacitor CLI) -->
+    <!-- For web testing: Capacitor gracefully falls back to localStorage -->
+    <script src="src/state.js"></script>
+    <script src="src/milestones.js"></script>
+    <script src="src/timer.js"></script>
+    <script src="src/notifications.js"></script>
+    <script src="src/ui.js"></script>
+    <script src="src/app.js"></script>
+    <script src="src/payments.js"></script>
+  </body>
+</html>

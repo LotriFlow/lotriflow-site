@@ -1,0 +1,32 @@
+workspace "App/App.xcworkspace"
+scheme "LotriFlowQuitWatch Watch App"
+
+# Apple Watch simulators for App Store Connect screenshots
+# Required dimensions:
+# - Ultra 3: 422 × 514px or 410 × 502px (49mm)
+# - Series 11: 416 × 496px (46mm)
+# - Series 9: 396 × 484px (45mm)
+# - Series 6: 368 × 448px (44mm) - using SE as substitute
+# - Series 3: 312 × 390px (38mm/40mm) - using SE as substitute
+
+devices([
+  "Apple Watch Ultra 3 (49mm)",    # 410 × 502px
+  "Apple Watch Series 11 (46mm)",  # 416 × 496px
+  "Apple Watch Series 9 (45mm)",   # 396 × 484px
+  "Apple Watch SE (44mm) (2nd generation)",  # 368 × 448px (substitute for Series 6)
+  "Apple Watch SE (40mm) (2nd generation)"   # 312 × 390px (substitute for Series 3)
+])
+
+languages(["en-US"])
+
+# Output directory for watch screenshots
+output_directory("./fastlane/watch_screenshots")
+
+# Clear previous screenshots
+clear_previous_screenshots(true)
+
+# Keep simulators visible for debugging
+headless(false)
+
+# Run tests sequentially for stability
+concurrent_simulators(false)

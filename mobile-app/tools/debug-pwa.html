@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Debug Tool</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: monospace;
+      background: #1a1a1a;
+      color: #00ff00;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { color: #00ff88; margin-bottom: 20px; border-bottom: 2px solid #00ff88; padding-bottom: 10px; }
+    h2 { color: #ffaa00; margin: 20px 0 10px; }
+    .check { margin: 10px 0; padding: 10px; background: #2a2a2a; border-radius: 5px; }
+    .pass { border-left: 4px solid #00ff00; }
+    .fail { border-left: 4px solid #ff0000; color: #ff4444; }
+    .warn { border-left: 4px solid #ffaa00; color: #ffaa00; }
+    button {
+      background: #00ff88;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      margin: 10px 5px 10px 0;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+    button:hover { background: #00cc6a; }
+    pre { background: #0a0a0a; padding: 15px; overflow-x: auto; border-radius: 5px; margin: 10px 0; }
+    .code { font-family: monospace; background: #333; padding: 2px 6px; border-radius: 3px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🔍 PWA Debug Tool - BreatheFree</h1>
+
+    <div style="background: #2a2a2a; padding: 15px; margin-bottom: 20px; border-radius: 5px;">
+      <strong style="color: #ffaa00;">This tool will diagnose why your PWA isn't installing.</strong><br>
+      Click "Run Diagnostics" below to check everything.
+    </div>
+
+    <button onclick="runDiagnostics()">🔍 Run Diagnostics</button>
+    <button onclick="forceClean()">🧹 Force Clean Everything</button>
+    <button onclick="window.location.reload()">🔄 Refresh Page</button>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    const results = document.getElementById('results');
+
+    function log(message, status = 'info') {
+      const div = document.createElement('div');
+      div.className = `check ${status}`;
+      div.innerHTML = message;
+      results.appendChild(div);
+    }
+
+    function clear() {
+      results.innerHTML = '';
+    }
+
+    async function runDiagnostics() {
+      clear();
+
+      log('<h2>🌐 Environment Checks</h2>', 'info');
+
+      // Check protocol
+      if (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1') {
+        log('✅ Protocol: ' + location.protocol + ' (OK for PWA)', 'pass');
+      } else {
+        log('❌ Protocol: ' + location.protocol + ' (PWA requires HTTPS or localhost)', 'fail');
+      }
+
+      // Check Service Worker support
+      if ('serviceWorker' in navigator) {
+        log('✅ Service Worker API: Supported', 'pass');
+      } else {
+        log('❌ Service Worker API: NOT supported', 'fail');
+      }
+
+      // Check beforeinstallprompt support
+      if ('onbeforeinstallprompt' in window) {
+        log('✅ beforeinstallprompt: Supported', 'pass');
+      } else {
+        log('⚠️  beforeinstallprompt: Not supported (may be iOS or already installed)', 'warn');
+      }
+
+      // Check manifest
+      const manifestLink = document.querySelector('link[rel="manifest"]');
+      if (manifestLink) {
+        log('✅ Manifest link: Found at ' + manifestLink.href, 'pass');
+        try {
+          const response = await fetch(manifestLink.href);
+          const manifest = await response.json();
+          log('<pre>' + JSON.stringify(manifest, null, 2) + '</pre>', 'pass');
+        } catch (e) {
+          log('❌ Manifest: Error loading - ' + e.message, 'fail');
+        }
+      } else {
+        log('❌ Manifest link: NOT found in HTML', 'fail');
+      }
+
+      log('<h2>🔧 Service Worker Status</h2>', 'info');
+
+      // Check service worker registrations
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        if (registrations.length === 0) {
+          log('⚠️  No service workers registered yet', 'warn');
+        } else {
+          registrations.forEach((reg, i) => {
+            log(`✅ Service Worker ${i + 1}: ${reg.scope}<br>
+                 State: ${reg.active ? 'Active' : reg.installing ? 'Installing' : 'Waiting'}`, 'pass');
+          });
+        }
+
+        // Check controller
+        if (navigator.serviceWorker.controller) {
+          log('✅ Service Worker controller: Active', 'pass');
+        } else {
+          log('⚠️  Service Worker controller: None (first visit or not registered)', 'warn');
+        }
+      }
+
+      log('<h2>💾 Cache Status</h2>', 'info');
+
+      // Check caches
+      if ('caches' in window) {
+        const cacheNames = await caches.keys();
+        if (cacheNames.length === 0) {
+          log('⚠️  No caches found', 'warn');
+        } else {
+          log('✅ Caches found: ' + cacheNames.length, 'pass');
+          cacheNames.forEach(name => {
+            const isOld = name.includes('v10') || name.includes('v9') || name.includes('v8');
+            if (isOld) {
+              log('⚠️  OLD CACHE DETECTED: ' + name + ' (DELETE THIS!)', 'fail');
+            } else {
+              log('✅ Cache: ' + name, 'pass');
+            }
+          });
+        }
+      }
+
+      log('<h2>📱 Installation Status</h2>', 'info');
+
+      // Check if installed
+      if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
+        log('✅ App is INSTALLED and running in standalone mode', 'pass');
+      } else {
+        log('⚠️  App is NOT installed (running in browser)', 'warn');
+      }
+
+      log('<h2>📋 Required Files Check</h2>', 'info');
+
+      // Check critical files
+      const files = [
+        '/manifest.json',
+        '/sw.js',
+        '/breathefree-timer.html',
+        '/icon-192x192.png',
+        '/icon-512x512.png'
+      ];
+
+      for (const file of files) {
+        try {
+          const response = await fetch(file, { method: 'HEAD' });
+          if (response.ok) {
+            log(`✅ ${file}: Accessible (${response.status})`, 'pass');
+          } else {
+            log(`❌ ${file}: Error ${response.status}`, 'fail');
+          }
+        } catch (e) {
+          log(`❌ ${file}: Failed to fetch - ${e.message}`, 'fail');
+        }
+      }
+
+      log('<h2>🎯 Recommendations</h2>', 'info');
+
+      const oldCaches = (await caches.keys()).filter(n =>
+        n.includes('v10') || n.includes('v9') || n.includes('v8') || n.includes('v7')
+      );
+
+      if (oldCaches.length > 0) {
+        log('⚠️  OLD CACHES DETECTED! Click "Force Clean Everything" button above', 'fail');
+      }
+
+      const regs = await navigator.serviceWorker.getRegistrations();
+      if (regs.length === 0) {
+        log('⚠️  Service worker not registered. Reload the page (Ctrl+F5) or visit /breathefree-timer.html', 'warn');
+      }
+
+      if (!(window.matchMedia('(display-mode: standalone)').matches)) {
+        log('💡 To install: Look for Install icon (⊕) in address bar, or use browser menu → Install app', 'info');
+      }
+
+      log('<h2>✅ Done!</h2>', 'pass');
+    }
+
+    async function forceClean() {
+      if (!confirm('This will DELETE all service workers, caches, and storage. Continue?')) {
+        return;
+      }
+
+      clear();
+      log('<h2>🧹 Force Cleaning...</h2>', 'info');
+
+      try {
+        // Unregister all service workers
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        for (const reg of registrations) {
+          await reg.unregister();
+          log('✅ Unregistered: ' + reg.scope, 'pass');
+        }
+
+        // Delete all caches
+        const cacheNames = await caches.keys();
+        for (const name of cacheNames) {
+          await caches.delete(name);
+          log('✅ Deleted cache: ' + name, 'pass');
+        }
+
+        // Clear storage
+        localStorage.clear();
+        sessionStorage.clear();
+        log('✅ Cleared localStorage and sessionStorage', 'pass');
+
+        log('<h2>✅ Cleaning Complete!</h2>', 'pass');
+        log('⚠️  NOW: Close this tab, close ALL browser tabs, restart browser, then visit:', 'warn');
+        log('<div style="font-size: 1.2em; margin: 10px 0;"><code class="code">http://localhost:8080/breathefree-timer.html</code></div>', 'warn');
+        log('Then press Ctrl+F5 to hard refresh', 'warn');
+
+      } catch (error) {
+        log('❌ Error: ' + error.message, 'fail');
+      }
+    }
+
+    // Auto-run on load
+    window.addEventListener('load', () => {
+      setTimeout(runDiagnostics, 500);
+    });
+  </script>
+</body>
+</html>

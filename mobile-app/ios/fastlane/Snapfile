@@ -1,0 +1,7 @@
+workspace "App/App.xcworkspace"
+scheme "App"
+# Capture both 6.5" and 6.7" simulators so snapshot produces App Store sizes (portrait + landscape)
+# iPhone 11 Pro Max = 1242x2688 (6.5" required by App Store Connect)
+# iPhone 13 Pro Max = 1284x2778 (6.7" required by App Store Connect)
+devices(["iPhone 11 Pro Max", "iPhone 13 Pro Max"])
+languages(["en-US"])

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PWA Installation Diagnostic</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: monospace;
+      background: #000;
+      color: #0f0;
+      padding: 20px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { color: #ff0; border-bottom: 2px solid #0f0; padding-bottom: 10px; }
+    .test {
+      background: #111;
+      border: 2px solid #333;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+    .pass { border-color: #0f0; }
+    .fail { border-color: #f00; color: #f00; }
+    .warn { border-color: #ff0; color: #ff0; }
+    .test-name { font-weight: bold; font-size: 1.1em; margin-bottom: 8px; }
+    .test-result { margin-left: 20px; font-size: 0.9em; }
+    button {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      margin: 10px 5px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    button:hover { background: #0c0; }
+    pre {
+      background: #000;
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-size: 11px;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 PWA Installation Diagnostic for Edge</h1>
+
+  <button onclick="runAllTests()">▶️ RUN ALL TESTS</button>
+  <button onclick="location.reload()">🔄 Refresh</button>
+  <button onclick="window.location.href='breathefree-timer.html'">📱 Go to App</button>
+
+  <div id="results"></div>
+
+  <script>
+    const results = document.getElementById('results');
+
+    function addTest(name, passed, details, warning = false) {
+      const div = document.createElement('div');
+      div.className = `test ${passed ? 'pass' : (warning ? 'warn' : 'fail')}`;
+      div.innerHTML = `
+        <div class="test-name">${passed ? '✅' : (warning ? '⚠️' : '❌')} ${name}</div>
+        <div class="test-result">${details}</div>
+      `;
+      results.appendChild(div);
+      return passed;
+    }
+
+    async function runAllTests() {
+      results.innerHTML = '<p style="color: #ff0;">Running diagnostics...</p>';
+
+      let allPassed = true;
+
+      // Test 1: HTTPS or localhost
+      const isSecure = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
+      allPassed &= addTest(
+        'Secure Context (HTTPS/Localhost)',
+        isSecure,
+        `Protocol: ${location.protocol}, Host: ${location.hostname}` +
+        (isSecure ? '' : '<br>❌ PWA requires HTTPS or localhost!')
+      );
+
+      // Test 2: Service Worker Support
+      const swSupported = 'serviceWorker' in navigator;
+      allPassed &= addTest(
+        'Service Worker API Support',
+        swSupported,
+        swSupported ? 'Supported' : '❌ Service Workers not supported in this browser'
+      );
+
+      // Test 3: Manifest Link
+      const manifestLink = document.querySelector('link[rel="manifest"]');
+      allPassed &= addTest(
+        'Manifest Link Tag',
+        !!manifestLink,
+        manifestLink ? `Found: <link rel="manifest" href="${manifestLink.href}">` : '❌ No manifest link found in HTML'
+      );
+
+      // Test 4: Fetch Manifest
+      let manifestData = null;
+      try {
+        const manifestResponse = await fetch('/manifest.json');
+        manifestData = await manifestResponse.json();
+        addTest(
+          'Manifest File Accessible',
+          manifestResponse.ok,
+          `Status: ${manifestResponse.status}<br><pre>${JSON.stringify(manifestData, null, 2)}</pre>`
+        );
+      } catch (err) {
+        allPassed = false;
+        addTest(
+          'Manifest File Accessible',
+          false,
+          `❌ Error: ${err.message}`
+        );
+      }
+
+      // Test 5: Manifest Required Fields
+      if (manifestData) {
+        const hasName = !!(manifestData.name || manifestData.short_name);
+        const hasStartUrl = !!manifestData.start_url;
+        const hasDisplay = !!manifestData.display;
+        const hasIcons = manifestData.icons && manifestData.icons.length > 0;
+
+        allPassed &= addTest(
+          'Manifest: Name',
+          hasName,
+          hasName ? `✅ name="${manifestData.name}", short_name="${manifestData.short_name}"` : '❌ Missing name/short_name'
+        );
+
+        allPassed &= addTest(
+          'Manifest: start_url',
+          hasStartUrl,
+          hasStartUrl ? `✅ start_url="${manifestData.start_url}"` : '❌ Missing start_url'
+        );
+
+        allPassed &= addTest(
+          'Manifest: display',
+          hasDisplay,
+          hasDisplay ? `✅ display="${manifestData.display}"` : '❌ Missing display property'
+        );
+
+        allPassed &= addTest(
+          'Manifest: icons',
+          hasIcons,
+          hasIcons ? `✅ ${manifestData.icons.length} icon(s) defined` : '❌ No icons defined'
+        );
+
+        // Test icon sizes
+        if (hasIcons) {
+          const has192 = manifestData.icons.some(i => i.sizes.includes('192'));
+          const has512 = manifestData.icons.some(i => i.sizes.includes('512'));
+          addTest(
+            'Manifest: Icon Sizes (192x192 and 512x512)',
+            has192 && has512,
+            `192x192: ${has192 ? '✅' : '❌'}, 512x512: ${has512 ? '✅' : '❌'}`,
+            !has192 || !has512
+          );
+        }
+      }
+
+      // Test 6: Icons Actually Exist
+      if (manifestData && manifestData.icons) {
+        for (const icon of manifestData.icons) {
+          try {
+            const response = await fetch(icon.src);
+            addTest(
+              `Icon File: ${icon.src}`,
+              response.ok,
+              response.ok ? `✅ ${response.status} - ${icon.sizes}` : `❌ ${response.status} Not Found`
+            );
+          } catch (err) {
+            allPassed = false;
+            addTest(
+              `Icon File: ${icon.src}`,
+              false,
+              `❌ Error: ${err.message}`
+            );
+          }
+        }
+      }
+
+      // Test 7: Service Worker Registration
+      if (swSupported) {
+        try {
+          const registrations = await navigator.serviceWorker.getRegistrations();
+          addTest(
+            'Service Worker Registration',
+            registrations.length > 0,
+            registrations.length > 0
+              ? `✅ ${registrations.length} SW registered:<br>${registrations.map(r => r.scope).join('<br>')}`
+              : '⚠️ No service worker registered yet (will register when app loads)',
+            registrations.length === 0
+          );
+
+          if (navigator.serviceWorker.controller) {
+            addTest(
+              'Service Worker Active',
+              true,
+              `✅ Active SW controlling this page: ${navigator.serviceWorker.controller.scriptURL}`
+            );
+          }
+        } catch (err) {
+          addTest(
+            'Service Worker Check',
+            false,
+            `❌ Error: ${err.message}`
+          );
+        }
+      }
+
+      // Test 8: Start URL Accessible
+      if (manifestData && manifestData.start_url) {
+        try {
+          const startUrlResponse = await fetch(manifestData.start_url);
+          allPassed &= addTest(
+            'start_url Accessible',
+            startUrlResponse.ok,
+            startUrlResponse.ok
+              ? `✅ ${startUrlResponse.status} - ${manifestData.start_url}`
+              : `❌ ${startUrlResponse.status} - Cannot load start_url`
+          );
+        } catch (err) {
+          allPassed = false;
+          addTest(
+            'start_url Accessible',
+            false,
+            `❌ Error: ${err.message}`
+          );
+        }
+      }
+
+      // Test 9: beforeinstallprompt event
+      addTest(
+        'beforeinstallprompt Event',
+        'onbeforeinstallprompt' in window,
+        'onbeforeinstallprompt' in window
+          ? '✅ Event supported (will fire if installable)'
+          : '⚠️ Not available (may not indicate failure)',
+        true
+      );
+
+      // Test 10: Display Mode
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+      addTest(
+        'Current Display Mode',
+        true,
+        isStandalone
+          ? '✅ Running as installed PWA (standalone)'
+          : 'ℹ️ Running in browser (not installed yet)',
+        true
+      );
+
+      // Test 11: Cache Storage
+      if ('caches' in window) {
+        try {
+          const cacheNames = await caches.keys();
+          addTest(
+            'Cache Storage',
+            cacheNames.length > 0,
+            cacheNames.length > 0
+              ? `✅ ${cacheNames.length} cache(s): ${cacheNames.join(', ')}`
+              : '⚠️ No caches yet (SW not installed)',
+            cacheNames.length === 0
+          );
+        } catch (err) {
+          addTest(
+            'Cache Storage',
+            false,
+            `❌ Error: ${err.message}`
+          );
+        }
+      }
+
+      // Final Summary
+      const summary = document.createElement('div');
+      summary.className = 'test ' + (allPassed ? 'pass' : 'fail');
+      summary.innerHTML = `
+        <div class="test-name">📊 SUMMARY</div>
+        <div class="test-result">
+          ${allPassed
+            ? '✅ ALL CRITICAL TESTS PASSED - PWA should be installable!'
+            : '❌ SOME TESTS FAILED - Fix the issues above to enable installation'
+          }
+          <br><br>
+          <strong>Edge Installation Tips:</strong><br>
+          1. Check address bar for ⊕ install icon<br>
+          2. Or: Edge menu (•••) → Apps → Install this site as an app<br>
+          3. Or: edge://apps/ to see installed PWAs<br>
+          4. If still not showing: Clear site data and refresh<br>
+          5. Make sure you're on http://localhost:8080 (not file://)
+        </div>
+      `;
+      results.appendChild(summary);
+    }
+
+    // Run automatically
+    runAllTests();
+  </script>
+</body>
+</html>

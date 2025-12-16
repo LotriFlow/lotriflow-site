@@ -1,0 +1,8 @@
+node_modules/
+.DS_Store
+dist/
+build/
+.vscode/
+# Ignore potentially stale root-level native folders (real ones are in mobile-app)
+/ios/
+/android/
