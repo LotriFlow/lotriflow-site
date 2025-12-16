@@ -4,7 +4,9 @@
   "description": "LotriFlow Quit and related web assets",
   "main": "index.js",
   "scripts": {
-    "build": "echo 'No build script defined.'"
+    "build": "cd mobile-app && npm install && npm run build",
+    "sync": "cd mobile-app && npx cap sync",
+    "ios": "cd mobile-app && npx cap open ios"
   },
   "author": "Christo Lotriet",
   "license": "MIT"

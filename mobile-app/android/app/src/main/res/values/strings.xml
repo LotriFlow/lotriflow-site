@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">LotriFlow Quit</string>
-    <string name="title_activity_main">LotriFlow Quit</string>
-    <string name="package_name">com.lotriflow.smokefree</string>
-    <string name="custom_url_scheme">com.lotriflow.smokefree</string>
-</resources>
