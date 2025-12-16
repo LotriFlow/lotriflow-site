@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../lotriflow-quit"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "lotriflow-site"
+	}
+}
