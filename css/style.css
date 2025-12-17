@@ -440,7 +440,7 @@ header.hero::before {
 }
 
 .flow-section {
-    padding: 4.5rem var(--container-padding);
+    padding: 3rem var(--container-padding) 4.5rem;
     background: #fff;
 }
 
@@ -576,9 +576,12 @@ footer {
     .features { grid-template-columns: 1fr; }
 
     .product-section,
-    .why-section,
-    .flow-section {
+    .why-section {
         padding: 3rem 1.1rem;
+    }
+
+    .flow-section {
+        padding: 2rem 1.1rem 3rem;
     }
 
     .product-card .btn-primary {
@@ -725,6 +728,11 @@ section[id] {
     padding: 1rem 2rem;
     font-size: 1.05rem;
     border-radius: var(--radius-md);
+    display: block;
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .product-section {
