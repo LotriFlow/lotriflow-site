@@ -35,6 +35,9 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 a { text-decoration: none; transition: all 0.2s ease; }
@@ -296,9 +299,9 @@ header.hero::before {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
-    padding: 4rem var(--container-padding);
     max-width: var(--max-width);
     margin: 0 auto;
+    width: 100%;
 }
 
 .feature-card {
@@ -417,9 +420,10 @@ header.hero::before {
 .section-header {
     text-align: center;
     margin-bottom: 2.5rem;
-    max-width: 700px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    width: 100%;
 }
 
 .section-header h2 {
@@ -437,11 +441,13 @@ header.hero::before {
 .why-section {
     padding: 4.5rem var(--container-padding);
     background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+    width: 100%;
 }
 
 .flow-section {
     padding: 3rem var(--container-padding) 4.5rem;
     background: #fff;
+    width: 100%;
 }
 
 .flow-steps {
@@ -481,6 +487,8 @@ footer {
     text-align: center;
     border-top: 1px solid var(--border);
     background: #fff;
+    width: 100%;
+    margin-top: auto;
 }
 
 .footer p {
@@ -672,8 +680,9 @@ section[id] {
 
 /* Featured Product Card */
 .single-product-container {
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .product-card-featured {
@@ -738,6 +747,7 @@ section[id] {
 .product-section {
     padding: 4rem var(--container-padding);
     background: var(--bg-section);
+    width: 100%;
 }
 
 /* Mobile Optimizations */
