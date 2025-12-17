@@ -407,7 +407,7 @@ header.hero::before {
 
 .section-header {
     text-align: center;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -426,12 +426,12 @@ header.hero::before {
 }
 
 .why-section {
-    padding: 6rem var(--container-padding);
+    padding: 4.5rem var(--container-padding);
     background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
 }
 
 .flow-section {
-    padding: 6rem var(--container-padding);
+    padding: 4.5rem var(--container-padding);
     background: #fff;
 }
 
@@ -566,7 +566,7 @@ footer {
     .product-section,
     .why-section,
     .flow-section {
-        padding: 3.5rem 1.1rem;
+        padding: 3rem 1.1rem;
     }
 
     .product-card .btn-primary {
