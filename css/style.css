@@ -3,6 +3,8 @@
     --primary-dark: #0284c7;
     --secondary: #0f172a;
     --text-main: #0f172a;
+    --text-dark: #0f172a;
+    --text-body: #334155;
     --text-muted: #475569;
     --text-light: #64748b;
     --bg-body: #f8fafc;
@@ -182,7 +184,6 @@ header.hero::before {
     margin-bottom: 1.5rem;
     font-family: 'Montserrat', 'Inter', Arial, sans-serif;
     color: #0f172a;
-    text-transform: lowercase;
 }
 
 .hero-description {
@@ -310,13 +311,15 @@ header.hero::before {
 
 .feature-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
 
+.feature-card-primary {
+    border: 2px solid var(--primary);
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.03), rgba(56, 189, 248, 0.08));
+}
+
 .feature-icon {
     font-size: 2.5rem;
     margin-bottom: 1rem;
     display: inline-block;
-    padding: 0.5rem;
-    background: rgba(56, 189, 248, 0.1);
-    border-radius: 12px;
 }
 
 .feature-card h3 {
@@ -505,7 +508,10 @@ footer {
         gap: 1rem;
     }
 
-    .nav-links { display: none; }
+    .nav-links {
+        font-size: 0.85rem;
+        gap: 1rem;
+    }
 
     header.hero {
         grid-template-columns: 1fr;
@@ -565,7 +571,7 @@ footer {
     }
 
     .hero-title-main { font-size: 2.3rem; }
-    .hero-stats { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
     .product-grid { grid-template-columns: 1fr; }
     .features { grid-template-columns: 1fr; }
 
@@ -613,15 +619,6 @@ footer {
   box-shadow: var(--shadow-lg);
 }
 
-/* Product grid */
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  max-width: var(--max-width);
-  margin: 0 auto;
-}
-
 /* Hero visual on larger screens */
 @media (min-width: 961px) {
   header.hero {
@@ -639,37 +636,24 @@ a:focus-visible, button:focus-visible {
   outline-offset: 4px;
 }
 
-/* App Store Badges */
+/* App Store Badge */
 .store-buttons {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
     margin-top: 24px;
 }
 
 .store-buttons a {
-    display: block;
-    width: 165px;
-    height: 55px;
+    display: inline-block;
 }
 
 .app-store-badge {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: left center;
+    height: 56px;
+    width: auto;
     transition: transform 0.2s ease;
 }
 
 .app-store-badge:hover {
-    transform: scale(1.02);
-}
-
-.badge-coming-soon {
-    opacity: 0.4;
-    pointer-events: none;
-    cursor: not-allowed;
+    transform: scale(1.05);
 }
 
 .hero-visual img {
@@ -748,18 +732,6 @@ section[id] {
     background: var(--bg-section);
 }
 
-/* Feature Cards Enhancement */
-.feature-card {
-    transition: all 0.3s ease;
-    border: 1px solid var(--border-light);
-}
-
-.feature-icon {
-    font-size: 1.75rem;
-    font-weight: 800;
-    color: var(--primary);
-}
-
 /* Mobile Optimizations */
 @media (max-width: 600px) {
     section[id] {
@@ -767,12 +739,10 @@ section[id] {
     }
 
     .store-buttons {
-        align-items: center;
-        gap: 10px;
+        justify-content: center;
     }
 
-    .store-buttons a {
-        width: 150px;
+    .app-store-badge {
         height: 50px;
     }
 
@@ -787,6 +757,4 @@ section[id] {
     .single-product-container {
         max-width: 100%;
     }
-}
-
 }
