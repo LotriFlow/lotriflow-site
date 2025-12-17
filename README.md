@@ -8,7 +8,6 @@ LotriFlow offers innovative apps designed to improve your health and productivit
 ## Features
 
 - **Stop Smoking App**: Track your progress, set goals, and get support to quit smoking.
-- **Fasting Tracker**: Monitor your fasting schedules and health metrics.
 - More products coming soon!
 
 ## Getting Started

@@ -2,11 +2,11 @@
 
 ![LotriFlow logo](assets/logo.png)
 
-Purposeful tools that help you quit smoking, build fasting rhythms, and protect your focus. Calm visuals, clear guidance, and data that stays personal.
+Purposeful tools that help you quit smoking and protect your focus. Calm visuals, clear guidance, and data that stays personal.
 
 ## What we are shipping
 - Stop Smoking app with milestones, craving logs, and gentle nudges.
-- Fasting and focus tools on the way, built on the same calm principles.
+- Focus tools on the way, built on the same calm principles.
 - A clean landing site at [lotriflow.com](https://lotriflow.com) that mirrors the in-app experience.
 
 ## Quick links
@@ -31,7 +31,7 @@ pwsh ./optimize_images.ps1
 
 ## Roadmap glimpses
 - Swap the App Store placeholder with the live listing link.
-- Add dedicated sections for fasting and focus once they ship.
+- Add dedicated sections for focus tools once they ship.
 - Publish a short changelog for site updates and product milestones.
 
 ## Contact
