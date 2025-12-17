@@ -575,6 +575,10 @@ footer {
         text-align: center;
     }
 
+    .legal-content {
+        padding-top: 180px !important;
+    }
+
     /* Hover animation for feature cards */
 .feature-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
