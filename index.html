@@ -47,9 +47,10 @@
     </script>
 
     <style>
-      .app-store-badge { height: 56px; transition: transform 0.2s ease; }
+      .app-store-badge { height: 56px; width: auto; transition: transform 0.2s ease; }
       .app-store-badge:hover { transform: scale(1.05); }
       .store-buttons { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-top: 12px; }
+      .store-buttons a { flex-shrink: 0; }
       .android-soon { padding: 12px 24px; background: rgba(255,255,255,0.9); border: 1px solid #e2e8f0; border-radius: 12px; color: #475569; font-weight: 600; }
       .hero-visual img { max-width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); }
       .feature-card { transition: all 0.3s ease; }
@@ -58,9 +59,9 @@
       section[id] { scroll-margin-top: 100px; }
       @media (max-width: 600px) {
         section[id] { scroll-margin-top: 140px; }
-        .store-buttons { flex-direction: column; align-items: stretch; }
-        .store-buttons a { display: block; }
-        .store-buttons img { width: 100%; height: auto; max-width: 250px; margin: 0 auto; display: block; }
+        .store-buttons { flex-direction: column; align-items: center; gap: 12px; }
+        .store-buttons a { display: block; width: 100%; max-width: 200px; }
+        .app-store-badge { width: 100%; height: auto; }
       }
     </style>
   </head>
