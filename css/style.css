@@ -643,6 +643,8 @@ a:focus-visible, button:focus-visible {
 .app-store-badge {
     height: 56px;
     width: auto;
+    max-height: 56px;
+    object-fit: contain;
     transition: transform 0.2s ease;
 }
 
@@ -655,16 +657,20 @@ a:focus-visible, button:focus-visible {
     flex-wrap: wrap;
     gap: 16px;
     align-items: center;
-    margin-top: 12px;
+    justify-content: flex-start;
+    margin-top: 20px;
 }
 
 .store-buttons a {
     flex-shrink: 0;
+    display: inline-block;
+    height: 56px;
 }
 
 .badge-coming-soon {
-    opacity: 0.6;
+    opacity: 0.5;
     pointer-events: none;
+    cursor: not-allowed;
 }
 
 .hero-visual img {
@@ -762,19 +768,18 @@ section[id] {
     }
 
     .store-buttons {
-        flex-direction: column;
-        align-items: center;
-        gap: 12px;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
     }
 
     .store-buttons a {
-        display: flex;
-        justify-content: center;
+        height: 50px;
     }
 
     .app-store-badge {
         height: 50px;
-        width: auto;
+        max-height: 50px;
     }
 
     .product-card-featured {
