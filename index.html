@@ -54,6 +54,14 @@
       .hero-visual img { max-width: 100%; border-radius: 20px; box-shadow: var(--shadow-lg); }
       .feature-card { transition: all 0.3s ease; }
       .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+      /* Prevent header overlap on anchor links */
+      section[id] { scroll-margin-top: 100px; }
+      @media (max-width: 600px) {
+        section[id] { scroll-margin-top: 140px; }
+        .store-buttons { flex-direction: column; align-items: stretch; }
+        .store-buttons a { display: block; }
+        .store-buttons img { width: 100%; height: auto; max-width: 250px; margin: 0 auto; display: block; }
+      }
     </style>
   </head>
   <body>
@@ -89,7 +97,7 @@
             <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store" class="app-store-badge" />
           </a>
           <a href="#" style="opacity: 0.6; pointer-events: none;">
-            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play (Coming Soon)" class="app-store-badge" style="height: 83px;" />
+            <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play (Coming Soon)" class="app-store-badge" />
           </a>
         </div>
 
