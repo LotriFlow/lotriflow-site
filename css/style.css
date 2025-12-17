@@ -641,11 +641,12 @@ a:focus-visible, button:focus-visible {
 
 /* App Store Badges */
 .app-store-badge {
-    height: 56px;
-    width: auto;
-    max-height: 56px;
+    height: 56px !important;
+    width: auto !important;
+    max-width: 180px;
     object-fit: contain;
     transition: transform 0.2s ease;
+    display: block;
 }
 
 .app-store-badge:hover {
@@ -655,7 +656,7 @@ a:focus-visible, button:focus-visible {
 .store-buttons {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
     align-items: center;
     justify-content: flex-start;
     margin-top: 20px;
@@ -663,8 +664,10 @@ a:focus-visible, button:focus-visible {
 
 .store-buttons a {
     flex-shrink: 0;
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     height: 56px;
+    overflow: hidden;
 }
 
 .badge-coming-soon {
@@ -770,16 +773,16 @@ section[id] {
     .store-buttons {
         flex-direction: row;
         justify-content: center;
-        gap: 10px;
+        gap: 8px;
     }
 
     .store-buttons a {
-        height: 50px;
+        height: 48px;
     }
 
     .app-store-badge {
-        height: 50px;
-        max-height: 50px;
+        height: 48px !important;
+        max-width: 150px;
     }
 
     .product-card-featured {
