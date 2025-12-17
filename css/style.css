@@ -768,14 +768,13 @@ section[id] {
     }
 
     .store-buttons a {
-        display: block;
-        width: 100%;
-        max-width: 200px;
+        display: flex;
+        justify-content: center;
     }
 
     .app-store-badge {
-        width: 100%;
-        height: auto;
+        height: 50px;
+        width: auto;
     }
 
     .product-card-featured {
