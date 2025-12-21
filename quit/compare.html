@@ -66,33 +66,45 @@
         border-collapse: separate;
         border-spacing: 0;
         background: white;
-        border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.08), 0 2px 8px rgba(0,0,0,0.04);
         overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
       }
       
       .compare-table th, .compare-table td {
-        padding: 24px;
+        padding: 20px 24px;
         text-align: center;
-        border-bottom: 1px solid #f1f5f9;
-        font-size: 1rem;
+        border-bottom: 1px solid #e2e8f0;
+        font-size: 0.95rem;
+        transition: background 0.2s ease;
+      }
+      
+      .compare-table tbody tr:hover td {
+        background: #f8fafc;
+      }
+      
+      .compare-table tbody tr:hover td.highlight {
+        background: #ecfdf5;
       }
       
       .compare-table th {
-        padding: 24px; /* Standard padding */
-        padding-top: 40px; /* Extra space for badges/alignment at top */
-        background: #f8fafc;
+        padding: 20px 24px;
+        padding-top: 48px;
+        background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
         font-family: 'Montserrat', sans-serif;
         font-weight: 800;
         color: var(--text-dark);
-        font-size: 1.1rem;
-        vertical-align: bottom; /* Align text to bottom effectively due to top padding */
+        font-size: 1rem;
+        vertical-align: bottom;
+        border-bottom: 2px solid #e2e8f0;
       }
 
       .compare-table th.highlight, .compare-table td.highlight {
-        background: #f0fdf4;
-        border-bottom-color: #dcfce7;
+        background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 50%, #ecfdf5 100%);
+        border-bottom-color: #a7f3d0;
       }
+
       
       .compare-table th.highlight {
         color: var(--primary-dark); /* Fixed: Darker blue for better visibility */
