@@ -182,6 +182,15 @@ module.exports = async function handler(req, res) {
   try {
     // Generate JWT token
     const token = generateJWT();
+    
+    // Debug info for troubleshooting
+    const debugInfo = {
+      keyIdConfigured: process.env.ASC_KEY_ID ? process.env.ASC_KEY_ID.substring(0, 4) + "..." : "MISSING",
+      issuerIdConfigured: process.env.ASC_ISSUER_ID ? process.env.ASC_ISSUER_ID.substring(0, 8) + "..." : "MISSING",
+      privateKeyConfigured: process.env.ASC_PRIVATE_KEY ? `${process.env.ASC_PRIVATE_KEY.length} chars` : "MISSING",
+      vendorConfigured: process.env.VENDOR_NUMBER ? "YES" : "MISSING",
+      tokenGenerated: token ? token.substring(0, 50) + "..." : "FAILED",
+    };
 
     // Prepare response object
     const stats = {
@@ -191,7 +200,7 @@ module.exports = async function handler(req, res) {
       activeUsers: null,
       rating: null,
       reviews: null,
-      raw: {},
+      raw: { debug: debugInfo },
     };
 
     // Try to fetch app info (for ratings)
