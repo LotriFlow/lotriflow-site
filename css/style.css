@@ -613,7 +613,12 @@ footer {
 
     .logo-img { height: 50px; }
 
-    .logo-name { font-size: 1.6rem; }
+    .logo-name { 
+        font-size: 1.6rem !important;
+        display: inline !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
 
     .btn-nav {
         width: 100%;
