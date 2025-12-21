@@ -103,21 +103,22 @@
       
       /* "Winner" Badge for LotriFlow */
       .compare-table th.highlight::after {
-        content: "Top Choice";
+        content: "TOP CHOICE";
         display: block;
-        font-size: 0.7rem;
-        background: var(--primary);
+        font-size: 0.65rem;
+        background: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 100%);
         color: white;
-        padding: 4px 10px;
-        border-radius: 20px;
+        padding: 6px 14px;
+        border-radius: 24px;
         position: absolute;
-        top: 12px; /* Fixed: Move INSIDE the cell to avoid clipping */
+        top: 10px;
         left: 50%;
         transform: translateX(-50%);
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 1.5px;
         font-weight: 800;
-        box-shadow: 0 2px 4px rgba(56, 189, 248, 0.4);
+        box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+        font-family: 'Montserrat', sans-serif;
       }
 
       .check { color: #10b981; font-weight: 700; font-size: 1.2rem; }
