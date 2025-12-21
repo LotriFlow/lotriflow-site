@@ -77,8 +77,9 @@ async function fetchSalesReport(token) {
     throw new Error("Missing VENDOR_NUMBER environment variable");
   }
 
-  // Try fetching reports from last 7 days (Apple has 1-2 day delay)
-  for (let daysBack = 1; daysBack <= 7; daysBack++) {
+  // Try fetching reports from last 14 days (Apple has delays, especially around holidays)
+  const errors = [];
+  for (let daysBack = 2; daysBack <= 14; daysBack++) {
     const reportDate = new Date();
     reportDate.setDate(reportDate.getDate() - daysBack);
     const dateStr = reportDate.toISOString().split("T")[0];
@@ -91,6 +92,7 @@ async function fetchSalesReport(token) {
         "filter[reportSubType]": "SUMMARY",
         "filter[reportType]": "INSTALLS",
         "filter[vendorNumber]": vendorNumber,
+        "filter[version]": "1_3",
       });
 
     try {
@@ -104,13 +106,16 @@ async function fetchSalesReport(token) {
       if (response.ok) {
         console.log(`[Sales] Found data for ${dateStr}`);
         return { response, date: dateStr };
+      } else {
+        const errorText = await response.text();
+        errors.push(`${dateStr}: ${response.status} - ${errorText.substring(0, 100)}`);
       }
     } catch (err) {
-      console.log(`[Sales] No data for ${dateStr}: ${err.message}`);
+      errors.push(`${dateStr}: ${err.message}`);
     }
   }
 
-  throw new Error("No sales data available for the last 7 days");
+  throw new Error(`No install data available. Errors: ${errors.slice(0, 3).join("; ")}`);
 }
 
 /**
