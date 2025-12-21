@@ -89,7 +89,7 @@ async function fetchSalesReport(token) {
         "filter[frequency]": "DAILY",
         "filter[reportDate]": dateStr,
         "filter[reportSubType]": "SUMMARY",
-        "filter[reportType]": "SALES",
+        "filter[reportType]": "INSTALLS",
         "filter[vendorNumber]": vendorNumber,
       });
 
