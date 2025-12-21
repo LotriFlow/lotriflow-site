@@ -200,7 +200,7 @@ header.hero::before {
 }
 
 .hero-title-main {
-    font-size: clamp(2.4rem, 4vw, 3.4rem);
+    font-size: clamp(2.2rem, 8vw, 3.4rem);
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 1.1;
@@ -447,7 +447,7 @@ header.hero::before {
 }
 
 .section-header h2 {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     font-weight: 800;
     margin-bottom: 1rem;
     color: var(--text-main);
@@ -532,29 +532,48 @@ footer {
 
 @media (max-width: 960px) {
     nav {
-        padding: 1.2rem 6%;
+        padding: 1.2rem var(--container-padding);
         gap: 1rem;
     }
 
     .nav-links {
-        font-size: 0.85rem;
-        gap: 1rem;
+        font-size: 0.9rem;
+        gap: 1.25rem;
     }
 
     header.hero {
         grid-template-columns: 1fr;
         padding-top: 140px;
+        text-align: center;
     }
 
-    .hero-content { text-align: left; }
+    .hero-content { 
+        text-align: center; 
+        margin: 0 auto;
+    }
+    
+    .cta-group {
+        justify-content: center;
+    }
+    
+    .hero-description {
+        text-align: center;
+        margin: 0 auto 1.5rem;
+    }
 }
 
 @media (max-width: 600px) {
     nav {
-        padding: 1rem 1.1rem;
+        padding: 0.75rem 1rem;
         flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
+        align-items: center;
+        gap: 0.5rem;
+        position: static; /* Prevent nav from covering too much on scroll if stacked */
+    }
+    
+    /* If sticky is desired, we keep fixed but optimize height */
+    body {
+        padding-top: 0; /* Adjust if nav is static */
     }
 
     .lotriflow-logo {
@@ -627,21 +646,24 @@ footer {
     }
 
     .footer-links {
-        flex-direction: column;
-        gap: 0.75rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem 1rem;
         margin-top: 1.5rem;
     }
 
     .footer-links a {
-        padding: 0.5rem;
-        display: block;
+        padding: 0.4rem;
+        display: inline-block;
     }
 
     .footer p {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
+}
 
-    /* Hover animation for feature cards */
+/* Hover animation for feature cards */
 .feature-card {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

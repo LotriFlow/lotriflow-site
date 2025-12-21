@@ -31,13 +31,13 @@
 
     <style>
       .blog-header {
-        padding: 120px 24px 60px;
+        padding: clamp(100px, 15vh, 140px) 24px 60px;
         text-align: center;
         background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
       }
       .blog-header h1 {
         font-family: 'Montserrat', sans-serif;
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 8vw, 3rem);
         color: var(--text-dark);
         margin-bottom: 16px;
       }
@@ -46,8 +46,17 @@
         margin: 0 auto;
         padding: 40px 24px 100px;
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         gap: 32px;
+      }
+      @media (max-width: 600px) {
+        .blog-header {
+          padding-top: 60px; /* Reduced since nav stack takes space */
+        }
+        .blog-grid {
+          grid-template-columns: 1fr;
+          padding-top: 20px;
+        }
       }
       .article-card {
         background: white;
