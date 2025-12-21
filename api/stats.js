@@ -68,6 +68,7 @@ function base64UrlEncode(data) {
 
 /**
  * Fetch sales report from App Store Connect
+ * Tries last 7 days since Apple's data has a delay
  */
 async function fetchSalesReport(token) {
   const vendorNumber = process.env.VENDOR_NUMBER;
@@ -76,34 +77,40 @@ async function fetchSalesReport(token) {
     throw new Error("Missing VENDOR_NUMBER environment variable");
   }
 
-  // Get yesterday's date for the report
-  const yesterday = new Date();
-  yesterday.setDate(yesterday.getDate() - 1);
-  const reportDate = yesterday.toISOString().split("T")[0];
+  // Try fetching reports from last 7 days (Apple has 1-2 day delay)
+  for (let daysBack = 1; daysBack <= 7; daysBack++) {
+    const reportDate = new Date();
+    reportDate.setDate(reportDate.getDate() - daysBack);
+    const dateStr = reportDate.toISOString().split("T")[0];
 
-  const url =
-    `${ASC_BASE_URL}/salesReports?` +
-    new URLSearchParams({
-      "filter[frequency]": "DAILY",
-      "filter[reportDate]": reportDate,
-      "filter[reportSubType]": "SUMMARY",
-      "filter[reportType]": "SALES",
-      "filter[vendorNumber]": vendorNumber,
-    });
+    const url =
+      `${ASC_BASE_URL}/salesReports?` +
+      new URLSearchParams({
+        "filter[frequency]": "DAILY",
+        "filter[reportDate]": dateStr,
+        "filter[reportSubType]": "SUMMARY",
+        "filter[reportType]": "SALES",
+        "filter[vendorNumber]": vendorNumber,
+      });
 
-  const response = await fetch(url, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/a]gzip",
-    },
-  });
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/a-gzip",
+        },
+      });
 
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`Sales API error: ${response.status} - ${error}`);
+      if (response.ok) {
+        console.log(`[Sales] Found data for ${dateStr}`);
+        return { response, date: dateStr };
+      }
+    } catch (err) {
+      console.log(`[Sales] No data for ${dateStr}: ${err.message}`);
+    }
   }
 
-  return response;
+  throw new Error("No sales data available for the last 7 days");
 }
 
 /**
@@ -195,10 +202,11 @@ module.exports = async function handler(req, res) {
 
     // Try to fetch sales data
     try {
-      const salesResponse = await fetchSalesReport(token);
+      const { response: salesResponse, date: salesDate } = await fetchSalesReport(token);
       // Sales reports come as gzipped TSV, parse accordingly
       const salesData = await salesResponse.text();
       stats.raw.sales = salesData;
+      stats.raw.salesDate = salesDate;
 
       // Parse simple metrics from sales data if available
       // This is a simplified parser - actual format may vary
