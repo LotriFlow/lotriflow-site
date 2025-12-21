@@ -113,16 +113,9 @@
         position: relative;
       }
       
-      /* Award Icon for LotriFlow */
-      .compare-table th.highlight::before {
-        content: "⭐";
-        display: block;
-        font-size: 1.2rem;
-        position: absolute;
-        top: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        filter: drop-shadow(0 2px 4px rgba(56, 189, 248, 0.4));
+      /* Award Icon for LotriFlow - hidden, using HTML instead */
+      .compare-table th.highlight {
+        padding-top: 55px;
       }
 
       .check { color: #10b981; font-weight: 700; font-size: 1.2rem; }
@@ -299,7 +292,7 @@
         <thead>
           <tr>
             <th style="text-align: left;">Feature</th>
-            <th class="highlight" style="font-weight: 900; letter-spacing: -0.05em; text-transform: lowercase;"><span style="color:#38bdf8;">lotri</span><span style="color:#222;">flow</span></th>
+            <th class="highlight" style="font-weight: 900; letter-spacing: -0.05em; text-transform: lowercase;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;margin:0 auto 6px;"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg><span style="color:#38bdf8;">lotri</span><span style="color:#222;">flow</span></th>
             <th>Typical Paid Apps</th>
             <th>Other Free Apps</th>
           </tr>
