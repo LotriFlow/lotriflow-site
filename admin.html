@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <title>Admin Dashboard | LotriFlow</title>
-    <link rel="icon" href="assets/logo.ico" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -514,7 +515,7 @@
     <!-- Login Overlay -->
     <div class="login-overlay" id="loginOverlay">
       <div class="login-box">
-        <h1>🔐 Admin Access</h1>
+        <h1><i data-feather="lock" style="vertical-align: -2px; margin-right: 8px;"></i> Admin Access</h1>
         <p class="subtitle">Enter your password to continue</p>
         <input
           type="password"
@@ -539,19 +540,19 @@
             <span>SmokeFree Journey Stats</span>
           </div>
         </div>
-        <button class="logout-btn" onclick="logout()">🚪 Logout</button>
+        <button class="logout-btn" onclick="logout()"><i data-feather="log-out" style="width: 16px; height: 16px; vertical-align: -2px; margin-right: 4px;"></i> Logout</button>
       </header>
 
       <div class="container">
         <!-- Quick Links to App Store Connect -->
-        <h2 class="section-title">🔗 App Store Connect</h2>
+        <h2 class="section-title"><i data-feather="activity" style="width: 20px; height: 20px; vertical-align: -3px; margin-right: 8px;"></i> App Store Connect</h2>
         <div class="quick-links">
           <a
             href="https://appstoreconnect.apple.com/analytics"
             target="_blank"
             class="quick-link"
           >
-            <span class="quick-link-icon">📊</span>
+            <span class="quick-link-icon"><i data-feather="bar-chart-2"></i></span>
             <div class="quick-link-content">
               <h3>App Analytics</h3>
               <p>Downloads, sessions, retention</p>
@@ -562,7 +563,7 @@
             target="_blank"
             class="quick-link"
           >
-            <span class="quick-link-icon">💰</span>
+            <span class="quick-link-icon"><i data-feather="dollar-sign"></i></span>
             <div class="quick-link-content">
               <h3>Sales & Trends</h3>
               <p>Revenue, units, proceeds</p>
@@ -584,7 +585,7 @@
             target="_blank"
             class="quick-link"
           >
-            <span class="quick-link-icon">📄</span>
+            <span class="quick-link-icon"><i data-feather="file-text"></i></span>
             <div class="quick-link-content">
               <h3>Financial Reports</h3>
               <p>Payments, taxes, agreements</p>
@@ -594,10 +595,10 @@
 
         <!-- Stats Display -->
         <div class="section-header-row">
-          <h2 class="section-title">📈 Quick Stats</h2>
+          <h2 class="section-title"><i data-feather="trending-up" style="width: 20px; height: 20px; vertical-align: -3px; margin-right: 8px;"></i> Quick Stats</h2>
           <div>
             <button class="fetch-btn" id="fetchBtn" onclick="fetchStatsFromAPI()">
-              <span id="fetchBtnText">🔄 Fetch from API</span>
+              <span id="fetchBtnText"><i data-feather="refresh-cw" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> Fetch from API</span>
               <span id="fetchSpinner" class="spinner" style="display: none;"></span>
             </button>
             <span class="fetch-status" id="fetchStatus"></span>
@@ -605,7 +606,7 @@
         </div>
         
         <div class="api-notice" id="apiNotice">
-          ⚠️ <strong>API Setup Required:</strong> To auto-fetch stats, deploy to Vercel and configure environment variables.
+          <i data-feather="alert-triangle" style="width: 16px; height: 16px; vertical-align: -3px; margin-right: 4px; color: #f59e0b;"></i> <strong>API Setup Required:</strong> To auto-fetch stats, deploy to Vercel and configure environment variables.
           <a href="https://appstoreconnect.apple.com/access/integrations/api" target="_blank">Get API credentials →</a>
         </div>
 
@@ -634,7 +635,7 @@
 
         <!-- Edit Stats -->
         <div class="edit-section">
-          <h2>✏️ Update Stats</h2>
+          <h2><i data-feather="edit-2" style="width: 20px; height: 20px; vertical-align: -3px; margin-right: 8px;"></i> Update Stats</h2>
           <p
             style="
               color: var(--text-muted);
@@ -707,13 +708,13 @@
               />
             </div>
           </div>
-          <button class="save-btn" onclick="saveStats()">💾 Save Stats</button>
-          <span class="save-success" id="saveSuccess">✓ Saved!</span>
+          <button class="save-btn" onclick="saveStats()"><i data-feather="save" style="width: 16px; height: 16px; vertical-align: -3px; margin-right: 6px;"></i> Save Stats</button>
+          <span class="save-success" id="saveSuccess"><i data-feather="check"></i> Saved!</span>
         </div>
 
         <!-- Notes -->
         <div class="notes-section">
-          <h2>📝 Notes</h2>
+          <h2><i data-feather="book-open" style="width: 20px; height: 20px; vertical-align: -3px; margin-right: 8px;"></i> Notes</h2>
           <textarea
             id="notesArea"
             placeholder="Add personal notes here... (auto-saved)"
@@ -942,5 +943,8 @@
         }
       }
     </script>
-  </body>
+      <script>
+      feather.replace();
+    </script>
+</body>
 </html>

@@ -28,6 +28,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../../css/style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <style>
       .blog-header {
@@ -131,7 +132,7 @@
     <main class="blog-grid">
       <!-- Article 1 -->
       <a href="quit-smoking-timeline.html" class="article-card">
-        <div class="article-image" style="background: #e0f2fe;">⏱️</div>
+        <div class="article-image" style="background: #e0f2fe;"><i data-feather="clock" style="width: 48px; height: 48px; color: #0369a1;"></i></div>
         <div class="article-content">
           <span class="article-tag">Recovery</span>
           <h2 class="article-title">The Complete Quit Smoking Timeline: What Happens to Your Body</h2>
@@ -141,7 +142,7 @@
       
       <!-- Placeholder Article 2 (Coming Soon behavior) -->
       <div class="article-card" style="opacity: 0.7;">
-        <div class="article-image" style="background: #fdf2f8;">🧠</div>
+        <div class="article-image" style="background: #fdf2f8;"><i data-feather="target" style="width: 48px; height: 48px; color: #9d174d;"></i></div>
         <div class="article-content">
           <span class="article-tag">Psychology</span>
           <h2 class="article-title">Why You Crave Nicotine (And How to Stop)</h2>
@@ -168,6 +169,7 @@
 
     <script>
       document.getElementById('year').textContent = new Date().getFullYear();
+      feather.replace();
     </script>
   </body>
 </html>

@@ -27,6 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
     
     <style>
       .compare-header {
@@ -205,40 +206,40 @@
         <tbody>
           <tr class="feature-row">
             <td>Private & No Account</td>
-            <td class="highlight check">✓ Yes (Instant Start)</td>
-            <td class="cross">Sign-up / Data Mining</td>
-            <td class="cross">Often Required</td>
+            <td class="highlight check"><i data-feather="check"></i> Yes (Instant Start)</td>
+            <td class="cross"><i data-feather="x"></i> Sign-up / Data Mining</td>
+            <td class="cross"><i data-feather="x"></i> Often Required</td>
           </tr>
           <tr class="feature-row">
             <td>Health Timeline</td>
-            <td class="highlight check">✓ All 18 Milestones</td>
+            <td class="highlight check"><i data-feather="check"></i> All 18 Milestones</td>
             <td>Locked (Pro Only)</td>
             <td>Limited</td>
           </tr>
           <tr class="feature-row">
             <td>Watch App & Widgets</td>
-            <td class="highlight check">✓ Included (Free)</td>
+            <td class="highlight check"><i data-feather="check"></i> Included (Free)</td>
             <td>Locked (Pro Only)</td>
-            <td class="cross">Rarely Included</td>
+            <td class="cross"><i data-feather="x"></i> Rarely Included</td>
           </tr>
           <tr class="feature-row">
             <td>Breathing Exercises</td>
-            <td class="highlight check">✓ Included (Free)</td>
+            <td class="highlight check"><i data-feather="check"></i> Included (Free)</td>
             <td>Locked (Pro Only)</td>
-            <td class="cross">No</td>
+            <td class="cross"><i data-feather="x"></i> No</td>
           </tr>
           <tr class="feature-row">
             <td>Pro Toolkit<br><span style="font-weight:400; font-size: 0.9em; color: var(--text-muted);">(Cravings, Reports, Sync)</span></td>
-            <td class="highlight check">✓ Lifetime Pro</td>
-            <td class="cross">Subscription Only</td>
-            <td class="cross">Limited / No</td>
+            <td class="highlight check"><i data-feather="check"></i> Lifetime Pro</td>
+            <td class="cross"><i data-feather="x"></i> Subscription Only</td>
+            <td class="cross"><i data-feather="x"></i> Limited / No</td>
           </tr>
 
            <tr class="feature-row">
             <td><strong>Pro Upgrade Cost</strong></td>
             <td class="highlight check"><strong>$2.99 / Lifetime</strong></td>
-            <td class="cross">$60+ / Year</td>
-            <td class="cross">Ads / Hidden Fees</td>
+            <td class="cross"><i data-feather="alert-circle"></i> $60+ / Year</td>
+            <td class="cross"><i data-feather="alert-circle"></i> Ads / Hidden Fees</td>
           </tr>
         </tbody>
       </table>
@@ -278,8 +279,11 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
     <script>
       document.getElementById('year').textContent = new Date().getFullYear();
+      feather.replace();
     </script>
   </body>
 </html>
+```

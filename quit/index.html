@@ -34,6 +34,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../css/style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -133,17 +134,17 @@
       </div>
       <div class="features">
         <div class="feature-card feature-card-primary">
-          <span class="feature-icon">🔒</span>
+          <span class="feature-icon"><i data-feather="shield"></i></span>
           <h3>100% Privacy First</h3>
           <p>No accounts. No cloud. No tracking. Your data never leaves your phone.</p>
         </div>
         <div class="feature-card">
-          <span class="feature-icon">📊</span>
+          <span class="feature-icon"><i data-feather="bar-chart-2"></i></span>
           <h3>See Real Progress</h3>
           <p>Animated milestones, dashboards, and stats that make every day feel like a win.</p>
         </div>
         <div class="feature-card">
-          <span class="feature-icon">💪</span>
+          <span class="feature-icon"><i data-feather="zap"></i></span>
           <h3>Support When You Need It</h3>
           <p>Intelligent coach, breathing exercises, and Apple Watch complications for tough moments.</p>
         </div>
@@ -189,22 +190,22 @@
       </div>
       <div class="features">
         <div class="feature-card">
-          <span class="feature-icon">❤️</span>
+          <span class="feature-icon"><i data-feather="heart"></i></span>
           <h3>20 Minutes</h3>
           <p>Heart rate and blood pressure begin to drop back to normal levels.</p>
         </div>
         <div class="feature-card">
-          <span class="feature-icon">🫁</span>
+          <span class="feature-icon"><i data-feather="wind"></i></span>
           <h3>24 Hours</h3>
           <p>Carbon monoxide levels in your blood return to normal. Oxygen levels increase.</p>
         </div>
         <div class="feature-card">
-          <span class="feature-icon">🧬</span>
+          <span class="feature-icon"><i data-feather="refresh-cw"></i></span>
           <h3>2 Weeks</h3>
           <p>Circulation improves and lung function begins to increase significantly.</p>
         </div>
         <div class="feature-card feature-card-primary">
-          <span class="feature-icon">🏆</span>
+          <span class="feature-icon"><i data-feather="award"></i></span>
           <h3>1 Year+</h3>
           <p>Risk of heart disease drops to half that of a smoker. Keep going!</p>
         </div>
@@ -231,9 +232,12 @@
       </div>
     </footer>
 
+    <script src="https://unpkg.com/feather-icons"></script>
     <script>
       // Auto-update copyright year
       document.getElementById('year').textContent = new Date().getFullYear();
+      feather.replace();
     </script>
   </body>
 </html>
+```

@@ -27,6 +27,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="../../css/style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -200,17 +201,17 @@
         <p>The earliest changes are often the most dramatic as your body purges the immediate toxins from cigarette smoke.</p>
 
         <div class="timeline-item">
-          <span class="timeline-time">20 Minutes</span>
+          <span class="timeline-time"><i data-feather="activity" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 20 Minutes</span>
           <strong>Heart Rate Stabilizes.</strong> Your pulse and blood pressure, which spike when you smoke, begin to drop back to normal levels. Your hands and feet may start to feel warmer as circulation improves.
         </div>
 
         <div class="timeline-item">
-          <span class="timeline-time">8 Hours</span>
+          <span class="timeline-time"><i data-feather="droplet" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 8 Hours</span>
           <strong>Nicotine Levels Fall.</strong> By now, the amount of nicotine in your bloodstream has fallen by more than 90%. While this is good for your health, it's also when early withdrawal symptoms might start.
         </div>
         
         <div class="timeline-item">
-          <span class="timeline-time">12 Hours</span>
+          <span class="timeline-time"><i data-feather="wind" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 12 Hours</span>
           <strong>Oxygen Levels Reset.</strong> Carbon monoxide, a toxic gas from cigarette smoke, prevents oxygen from entering your lungs and blood. At 12 hours, carbon monoxide levels return to normal, and your blood oxygen levels increase significantly.
         </div>
 
@@ -218,12 +219,12 @@
         <p>The first few days are often the most challenging physically, as your body adjusts to being nicotine-free. However, the biological repairs accelerating during this time are massive.</p>
         
         <div class="timeline-item">
-          <span class="timeline-time">48 Hours</span>
+          <span class="timeline-time"><i data-feather="coffee" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 48 Hours</span>
           <strong>Senses Return.</strong> Smoking damages the nerve endings in your nose and mouth. At two days smoke-free, you may notice that food tastes better and smells are more distinct as these nerves begin to heal.
         </div>
 
         <div class="timeline-item">
-          <span class="timeline-time">72 Hours</span>
+          <span class="timeline-time"><i data-feather="wind" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 72 Hours</span>
           <strong>Breathing Eases.</strong> Your bronchial tubes begin to relax, making breathing feel easier. Your energy levels may also start to increase.
         </div>
 
@@ -237,17 +238,17 @@
         <p>As you move from weeks to months, the benefits compound. Your risk for serious diseases begins to drop significantly.</p>
 
         <div class="timeline-item">
-          <span class="timeline-time">1 Year</span>
+          <span class="timeline-time"><i data-feather="heart" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 1 Year</span>
           <strong>Heart Disease Risk Halved.</strong> Your risk of coronary heart disease is now half that of a smoker. This is a massive milestone for your long-term longevity.
         </div>
 
         <div class="timeline-item">
-          <span class="timeline-time">10 Years</span>
+          <span class="timeline-time"><i data-feather="award" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 10 Years</span>
           <strong>Lung Health Restored.</strong> Your risk of lung cancer falls to about half that of a smoker. Pre-cancerous cells are replaced by healthy cells.
         </div>
 
         <div class="timeline-item">
-          <span class="timeline-time">15 Years</span>
+          <span class="timeline-time"><i data-feather="sun" style="width: 14px; height: 14px; vertical-align: -2px; margin-right: 4px;"></i> 15 Years</span>
           <strong>Full Recovery.</strong> Your risk of coronary heart disease is now the same as someone who has never smoked. Your body has effectively healed much of the long-term damage.
         </div>
 
@@ -282,6 +283,7 @@
 
     <script>
       document.getElementById('year').textContent = new Date().getFullYear();
+      feather.replace();
     </script>
   </body>
 </html>
