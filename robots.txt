@@ -1,0 +1,11 @@
+# LotriFlow Robots.txt
+# https://lotriflow.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://lotriflow.com/sitemap.xml
+
+# Exclude admin page
+Disallow: /admin.html

@@ -1,12 +1,10 @@
 {
-  "name": "smokefree",
+  "name": "lotriflow-site",
   "version": "1.0.0",
-  "description": "LotriFlow Quit and related web assets",
-  "main": "index.js",
+  "description": "LotriFlow marketing website - static HTML",
   "scripts": {
-    "build": "cd mobile-app && npm install && npm run build",
-    "sync": "cd mobile-app && npx cap sync",
-    "ios": "cd mobile-app && npx cap open ios"
+    "build": "echo 'Static site - no build required'",
+    "dev": "npx serve ."
   },
   "author": "Christo Lotriet",
   "license": "MIT"

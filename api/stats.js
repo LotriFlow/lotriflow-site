@@ -15,8 +15,14 @@ function generateJWT() {
     throw new Error("Missing App Store Connect API credentials");
   }
 
-  // Decode the base64-encoded private key
-  const privateKey = Buffer.from(privateKeyBase64, "base64").toString("utf8");
+  // Decode the base64-encoded private key (it's a PEM file)
+  const privateKeyPEM = Buffer.from(privateKeyBase64, "base64").toString("utf8");
+
+  // Create a proper key object from the PEM
+  const privateKey = crypto.createPrivateKey({
+    key: privateKeyPEM,
+    format: "pem",
+  });
 
   // JWT Header
   const header = {
@@ -38,14 +44,15 @@ function generateJWT() {
   const encodedHeader = base64UrlEncode(JSON.stringify(header));
   const encodedPayload = base64UrlEncode(JSON.stringify(payload));
 
-  // Create signature
+  // Create signature using the proper key object
   const signatureInput = `${encodedHeader}.${encodedPayload}`;
   const sign = crypto.createSign("SHA256");
   sign.update(signatureInput);
   sign.end();
 
-  const signature = sign.sign(privateKey);
-  const encodedSignature = base64UrlEncode(signature);
+  // Sign with DSA signature format for ES256
+  const derSignature = sign.sign({ key: privateKey, dsaEncoding: "ieee-p1363" });
+  const encodedSignature = base64UrlEncode(derSignature);
 
   return `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
 }

@@ -1,12 +1,21 @@
 # Admin Dashboard - Deployment Setup Guide
 
+## Hosting
+
+| Service         | URL                                                                     | Login              |
+| --------------- | ----------------------------------------------------------------------- | ------------------ |
+| **Vercel**      | [vercel.com](https://vercel.com)                                        | `me@lotriflow.com` |
+| **Domain**      | [lotriflow.com](https://lotriflow.com)                                  | Namecheap          |
+| **GitHub Repo** | [LotriFlow/lotriflow-site](https://github.com/LotriFlow/lotriflow-site) | GitHub             |
+
 ## Current Status ✓
 
+- ✅ Site deployed to Vercel
+- ✅ Custom domain `lotriflow.com` configured
+- ✅ SSL certificate active
 - ✅ Admin page created (`admin.html`) - password: `lotriflow2024`
 - ✅ API function ready (`api/stats.js`)
-- ✅ Vercel config ready (`vercel.json`)
-- ✅ Code pushed to GitHub
-- ⏳ **Waiting**: Vercel account deletion (48 hours) OR use Netlify
+- ⏳ **Pending**: App Store Connect API environment variables
 
 ---
 

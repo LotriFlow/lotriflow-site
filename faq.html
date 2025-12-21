@@ -3,120 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LotriFlow Quit FAQ - lotriflow</title>
+    <meta name="description" content="Frequently asked questions about LotriFlow Quit - Learn how to use the app, track your progress, and quit smoking successfully." />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://lotriflow.com/faq.html" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="FAQ | LotriFlow Quit" />
+    <meta property="og:description" content="Frequently asked questions about LotriFlow Quit - Learn how to use the app, track your progress, and quit smoking successfully." />
+    <meta property="og:image" content="https://lotriflow.com/assets/logo-512.png" />
+    <meta property="og:url" content="https://lotriflow.com/faq.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="LotriFlow" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="FAQ | LotriFlow Quit" />
+    <meta name="twitter:description" content="Frequently asked questions about LotriFlow Quit - Learn how to use the app and quit smoking." />
+    <meta name="twitter:image" content="https://lotriflow.com/assets/logo-512.png" />
+
+    <title>FAQ | LotriFlow Quit</title>
+    <link rel="icon" href="assets/logo.ico" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/logo-180.png" />
+    <link rel="manifest" href="manifest.json" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <!-- FAQPage Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I start using LotriFlow Quit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Simply set your Target Interval (minutes between cigarettes) and Daily Limit (cigarettes per day) in Settings. Then tap \"Log Cigarette\" each time you smoke. The app will track your progress automatically!"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my data private?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Absolutely! LotriFlow Quit stores ALL data locally on your device. We don't collect, transmit, or sell any personal information. No cloud sync means complete privacy. Your quit journey is yours alone."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Health Milestones?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Health Milestones show how your body heals after quitting smoking. View them in the Health tab to see milestones like: 20 minutes (heart rate normalizes), 24 hours (carbon monoxide levels drop), 2 weeks (circulation improves), and 1 month (lung function increases)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What's included in LotriFlow Quit Pro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "LotriFlow Quit Pro includes Advanced Analytics (14-day and 30-day trend charts), Craving Pattern Reports to identify triggers, Progress Sharing with friends, and Data Export functionality. It's a one-time purchase of $2.99 for lifetime access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I contact support?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Email us at hello@lotriflow.com. We typically respond within 24-48 hours."
+          }
+        }
+      ]
+    }
+    </script>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f5f5f7;
-            padding: 20px;
-        }
-
-        .container {
+        .legal-content {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 120px 24px 80px;
         }
-
-        h1 {
-            color: #1d1d1f;
+        .legal-content h1 {
+            font-family: 'Montserrat', sans-serif;
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--text-dark, #1d1d1f);
+            margin-bottom: 8px;
         }
-
         .subtitle {
-            color: #86868b;
+            color: var(--text-muted, #86868b);
             font-size: 1.2rem;
             margin-bottom: 40px;
         }
-
         .faq-section {
             margin-bottom: 40px;
         }
-
-        h2 {
-            color: #1d1d1f;
-            font-size: 1.8rem;
+        .faq-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--text-dark, #1d1d1f);
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #0071e3;
+            border-bottom: 2px solid var(--primary, #38bdf8);
         }
-
         .faq-item {
             margin-bottom: 30px;
         }
-
         .question {
             font-weight: 600;
             font-size: 1.1rem;
-            color: #1d1d1f;
+            color: var(--text-dark, #1d1d1f);
             margin-bottom: 10px;
         }
-
         .answer {
-            color: #515154;
+            color: var(--text-body, #515154);
             line-height: 1.8;
             padding-left: 20px;
         }
-
         .answer ul {
             margin: 10px 0;
             padding-left: 20px;
         }
-
         .answer li {
             margin-bottom: 8px;
         }
-
         .highlight {
-            background: #f0f9ff;
-            padding: 2px 6px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(99, 102, 241, 0.1));
+            padding: 2px 8px;
             border-radius: 4px;
             font-weight: 500;
-        }
-
-        .footer {
-            margin-top: 60px;
-            padding-top: 30px;
-            border-top: 1px solid #d2d2d7;
-            text-align: center;
-            color: #86868b;
-        }
-
-        .footer a {
-            color: #0071e3;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            h1 {
-                font-size: 2rem;
-            }
-            h2 {
-                font-size: 1.5rem;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <nav aria-label="Main navigation">
+      <a href="index.html" class="lotriflow-logo" aria-label="LotriFlow Home">
+        <img src="assets/logo.png" alt="LotriFlow logo" class="logo-img" />
+        <span class="logo-name"><span class="logo-name-lotri">lotri</span><span class="logo-name-flow">flow</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="index.html#features">Features</a>
+        <a href="index.html#how-it-works">How It Works</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main class="legal-content">
         <h1>LotriFlow Quit FAQ</h1>
         <p class="subtitle">Frequently Asked Questions</p>
 
@@ -281,16 +321,24 @@
                 </div>
             </div>
         </div>
+    </main>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>
-                <a href="https://lotriflow.com">lotriflow.com</a> ·
-                <a href="https://lotriflow.com/privacy.html">Privacy Policy</a> ·
-                <a href="https://lotriflow.com/terms.html">Terms of Service</a>
-            </p>
-            <p style="margin-top: 10px;">© 2024 lotriflow. All rights reserved.</p>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; <span id="year">2025</span> LotriFlow. All rights reserved.</p>
+        <p>Contact: <a href="mailto:hello@lotriflow.com">hello@lotriflow.com</a></p>
+        <div class="footer-links">
+          <a href="index.html#features">Features</a>
+          <a href="index.html#how-it-works">How It Works</a>
+          <a href="faq.html">FAQ</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
         </div>
-    </div>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>
