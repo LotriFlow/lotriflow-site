@@ -6,6 +6,9 @@
     "build": "echo 'Static site - no build required'",
     "dev": "npx serve ."
   },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  },
   "author": "Christo Lotriet",
   "license": "MIT"
 }

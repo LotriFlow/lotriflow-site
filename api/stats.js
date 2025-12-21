@@ -1,10 +1,10 @@
-const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
 
 // App Store Connect API configuration
 const ASC_BASE_URL = "https://api.appstoreconnect.apple.com/v1";
 
 /**
- * Generate JWT token for App Store Connect API
+ * Generate JWT token for App Store Connect API using jsonwebtoken library
  */
 function generateJWT() {
   const issuerId = process.env.ASC_ISSUER_ID;
@@ -16,22 +16,9 @@ function generateJWT() {
   }
 
   // Decode the base64-encoded private key (it's a PEM file)
-  const privateKeyPEM = Buffer.from(privateKeyBase64, "base64").toString("utf8");
+  const privateKey = Buffer.from(privateKeyBase64, "base64").toString("utf8");
 
-  // Create a proper key object from the PEM
-  const privateKey = crypto.createPrivateKey({
-    key: privateKeyPEM,
-    format: "pem",
-  });
-
-  // JWT Header
-  const header = {
-    alg: "ES256",
-    kid: keyId,
-    typ: "JWT",
-  };
-
-  // JWT Payload (expires in 20 minutes)
+  // JWT Payload
   const now = Math.floor(Date.now() / 1000);
   const payload = {
     iss: issuerId,
@@ -40,30 +27,13 @@ function generateJWT() {
     aud: "appstoreconnect-v1",
   };
 
-  // Encode header and payload
-  const encodedHeader = base64UrlEncode(JSON.stringify(header));
-  const encodedPayload = base64UrlEncode(JSON.stringify(payload));
+  // Sign with RS256 (App Store Connect uses ES256)
+  const token = jwt.sign(payload, privateKey, {
+    algorithm: "ES256",
+    keyid: keyId,
+  });
 
-  // Create signature using the proper key object
-  const signatureInput = `${encodedHeader}.${encodedPayload}`;
-  const sign = crypto.createSign("SHA256");
-  sign.update(signatureInput);
-  sign.end();
-
-  // Sign with DSA signature format for ES256
-  const derSignature = sign.sign({ key: privateKey, dsaEncoding: "ieee-p1363" });
-  const encodedSignature = base64UrlEncode(derSignature);
-
-  return `${encodedHeader}.${encodedPayload}.${encodedSignature}`;
-}
-
-function base64UrlEncode(data) {
-  const buffer = typeof data === "string" ? Buffer.from(data) : data;
-  return buffer
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=/g, "");
+  return token;
 }
 
 /**
