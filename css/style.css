@@ -99,9 +99,12 @@ nav {
     font-family: 'Montserrat', 'Inter', Arial, sans-serif;
     line-height: 1;
     text-transform: lowercase;
+    display: inline !important;
+    visibility: visible !important;
 }
 
-.logo-name-lotri { color: #38bdf8; }
+.logo-name-lotri { color: #38bdf8 !important; }
+.logo-name-flow { color: #222 !important; }
 
 .nav-links {
     display: flex;
