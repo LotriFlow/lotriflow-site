@@ -101,6 +101,8 @@ nav {
     text-transform: lowercase;
     display: inline !important;
     visibility: visible !important;
+    /* Temporary test border to verify CSS loads */
+    outline: 2px solid red !important;
 }
 
 .logo-name-lotri { color: #38bdf8 !important; }
