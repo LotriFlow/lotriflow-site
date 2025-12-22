@@ -28,6 +28,8 @@
 
 html { scroll-behavior: smooth; }
 
+img { max-width: 100%; height: auto; }
+
 .feather {
   width: 24px;
   height: 24px;
@@ -599,7 +601,7 @@ footer {
 
 @media (max-width: 960px) and (orientation: landscape) {
     header.hero {
-        padding-top: 100px;
+        padding-top: 70px;
     }
 }
 
@@ -613,8 +615,15 @@ footer {
     }
 
     .nav-links {
+        flex-direction: column;
         flex-wrap: wrap;
         justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .nav-links a {
+        width: 100%;
         text-align: center;
     }
 
@@ -645,8 +654,8 @@ footer {
     }
 
     header.hero {
-        padding: 60px 1.1rem 60px;
-        row-gap: 1.5rem;
+        padding: 32px 1.1rem 56px;
+        row-gap: 1.25rem;
     }
 
     .hero-content {
@@ -690,7 +699,12 @@ footer {
     }
 
     .legal-content {
-        padding-top: 60px !important;
+        padding-top: 40px !important;
+    }
+
+    .legal-content h1 {
+        margin-top: 24px !important;
+        font-size: 1.85rem !important;
     }
 
     footer {
