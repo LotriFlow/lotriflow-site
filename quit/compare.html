@@ -212,10 +212,15 @@
       }
 
       @media (max-width: 720px) {
+        .compare-table-container {
+          overflow-x: visible;
+        }
+
         .compare-table {
           background: transparent;
           border: none;
           box-shadow: none;
+          min-width: 0;
           overflow: visible;
         }
 
@@ -254,8 +259,19 @@
         .compare-table td::before {
           color: var(--text-muted);
           content: attr(data-label);
-          flex: 0 0 42%;
+          flex: 0 0 38%;
           font-weight: 600;
+        }
+
+        .compare-table td[data-label="Feature"] {
+          display: block;
+          font-weight: 700;
+          color: var(--text-dark);
+          background: var(--bg-section);
+        }
+
+        .compare-table td[data-label="Feature"]::before {
+          display: none;
         }
 
         .compare-table tr td:last-child {
@@ -356,39 +372,39 @@
           <tr class="feature-row">
             <td data-label="Feature">Private & No Account</td>
             <td data-label="LotriFlow" class="highlight check"><i data-feather="check"></i> Yes (Instant Start)</td>
-            <td data-label="Typical Paid Apps" class="cross"><i data-feather="x"></i> Sign-up / Data Mining</td>
-            <td data-label="Other Free Apps" class="cross"><i data-feather="x"></i> Often Required</td>
+            <td data-label="Paid apps" class="cross"><i data-feather="x"></i> Sign-up / Data Mining</td>
+            <td data-label="Free apps" class="cross"><i data-feather="x"></i> Often Required</td>
           </tr>
           <tr class="feature-row">
             <td data-label="Feature">Health Timeline</td>
             <td data-label="LotriFlow" class="highlight check"><i data-feather="check"></i> All 18 Milestones</td>
-            <td data-label="Typical Paid Apps">Locked (Pro Only)</td>
-            <td data-label="Other Free Apps">Limited</td>
+            <td data-label="Paid apps">Locked (Pro Only)</td>
+            <td data-label="Free apps">Limited</td>
           </tr>
           <tr class="feature-row">
             <td data-label="Feature">Watch App & Widgets</td>
             <td data-label="LotriFlow" class="highlight check"><i data-feather="check"></i> Included (Free)</td>
-            <td data-label="Typical Paid Apps">Locked (Pro Only)</td>
-            <td data-label="Other Free Apps" class="cross"><i data-feather="x"></i> Rarely Included</td>
+            <td data-label="Paid apps">Locked (Pro Only)</td>
+            <td data-label="Free apps" class="cross"><i data-feather="x"></i> Rarely Included</td>
           </tr>
           <tr class="feature-row">
             <td data-label="Feature">Breathing Exercises</td>
             <td data-label="LotriFlow" class="highlight check"><i data-feather="check"></i> Included (Free)</td>
-            <td data-label="Typical Paid Apps">Locked (Pro Only)</td>
-            <td data-label="Other Free Apps" class="cross"><i data-feather="x"></i> No</td>
+            <td data-label="Paid apps">Locked (Pro Only)</td>
+            <td data-label="Free apps" class="cross"><i data-feather="x"></i> No</td>
           </tr>
           <tr class="feature-row">
             <td data-label="Feature">Pro Toolkit<br><span style="font-weight:400; font-size: 0.9em; color: var(--text-muted);">(Cravings, Reports, Sync)</span></td>
             <td data-label="LotriFlow" class="highlight check"><i data-feather="check"></i> Lifetime Pro</td>
-            <td data-label="Typical Paid Apps" class="cross"><i data-feather="x"></i> Subscription Only</td>
-            <td data-label="Other Free Apps" class="cross"><i data-feather="x"></i> Limited / No</td>
+            <td data-label="Paid apps" class="cross"><i data-feather="x"></i> Subscription Only</td>
+            <td data-label="Free apps" class="cross"><i data-feather="x"></i> Limited / No</td>
           </tr>
 
            <tr class="feature-row">
             <td data-label="Feature"><strong>Pro Upgrade Cost</strong></td>
             <td data-label="LotriFlow" class="highlight check"><strong>$2.99 / Lifetime</strong></td>
-            <td data-label="Typical Paid Apps" class="cross"><i data-feather="alert-circle"></i> $60+ / Year</td>
-            <td data-label="Other Free Apps" class="cross"><i data-feather="alert-circle"></i> Ads / Hidden Fees</td>
+            <td data-label="Paid apps" class="cross"><i data-feather="alert-circle"></i> $60+ / Year</td>
+            <td data-label="Free apps" class="cross"><i data-feather="alert-circle"></i> Ads / Hidden Fees</td>
           </tr>
         </tbody>
       </table>
