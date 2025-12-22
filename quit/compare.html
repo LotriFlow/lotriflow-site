@@ -152,31 +152,91 @@
         text-align: center;
       }
       
-      .preview-grid {
+      .preview-showcase {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        gap: 28px;
+        align-items: center;
+        max-width: 980px;
+        margin: 36px auto 0;
+      }
+
+      .preview-stack {
+        display: grid;
+        gap: 20px;
+        align-items: center;
+      }
+
+      .preview-card {
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 18px;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 32px;
-        max-width: 1000px;
-        margin: 40px auto 0;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        box-shadow: var(--shadow-sm);
       }
-      
-      .app-screen {
+
+      .preview-card-phone {
+        padding: 20px 18px 24px;
+      }
+
+      .preview-card-widget {
+        padding: 16px;
+      }
+
+      .preview-label {
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--text-muted);
+        background: rgba(15, 23, 42, 0.06);
+        padding: 4px 8px;
+        border-radius: 999px;
+        align-self: flex-start;
+      }
+
+      .preview-image {
         width: 100%;
-        max-width: 260px;
-        border-radius: 24px;
-        box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
-        border: 4px solid #fff;
-        transition: transform 0.3s ease;
+        height: auto;
+        border-radius: 14px;
+        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
       }
-      
-      .app-screen:hover {
-        transform: translateY(-8px);
+
+      .preview-image-phone {
+        max-width: 320px;
       }
-      
-      .watch-screen {
-        max-width: 170px !important; /* Smaller size for realistic proportion */
-        align-self: center;
+
+      .preview-image-widget {
+        max-width: 360px;
+        border-radius: 12px;
+        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
+      }
+
+      .preview-image-watch {
+        max-width: 170px;
+        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
+      }
+
+      @media (max-width: 900px) {
+        .preview-showcase {
+          grid-template-columns: 1fr;
+        }
+
+        .preview-card {
+          padding: 16px;
+        }
+
+        .preview-image-phone {
+          max-width: 280px;
+        }
+
+        .preview-image-widget {
+          max-width: 320px;
+        }
       }
 
       /* Mobile Optimizations */
@@ -331,8 +391,33 @@
           padding: 20px 16px 40px;
         }
 
-        .preview-grid {
+        .preview-showcase {
           gap: 20px;
+          margin-top: 28px;
+        }
+
+        .preview-stack {
+          gap: 16px;
+        }
+
+        .preview-card {
+          padding: 14px;
+        }
+
+        .preview-label {
+          font-size: 0.65rem;
+        }
+
+        .preview-image-phone {
+          max-width: 240px;
+        }
+
+        .preview-image-widget {
+          max-width: 280px;
+        }
+
+        .preview-image-watch {
+          max-width: 140px;
         }
       }
     </style>
@@ -417,9 +502,21 @@
         <h3 style="font-family: 'Montserrat', sans-serif; font-size: 2rem; margin-bottom: 1rem; color: var(--text-dark);">See LotriFlow in Action</h3>
         <p style="color: var(--text-muted);">Clean, modern design focused on your recovery.</p>
         
-        <div class="preview-grid" style="align-items: center;">
-          <img src="../assets/screenshots/ios_screenshot.png" alt="LotriFlow Dashboard" class="app-screen" />
-          <img src="../assets/screenshots/watch.png" alt="Apple Watch App" class="app-screen watch-screen" />
+        <div class="preview-showcase">
+          <div class="preview-card preview-card-phone">
+            <span class="preview-label">iPhone</span>
+            <img src="../assets/screenshots/ios_screenshot.png" alt="LotriFlow iPhone dashboard" class="preview-image preview-image-phone" />
+          </div>
+          <div class="preview-stack">
+            <div class="preview-card preview-card-widget">
+              <span class="preview-label">Widget</span>
+              <img src="../assets/screenshots/widget.png" alt="Quit progress widget" class="preview-image preview-image-widget" />
+            </div>
+            <div class="preview-card preview-card-watch">
+              <span class="preview-label">Watch</span>
+              <img src="../assets/screenshots/watch.png" alt="Apple Watch app" class="preview-image preview-image-watch" />
+            </div>
+          </div>
         </div>
       </section>
 
