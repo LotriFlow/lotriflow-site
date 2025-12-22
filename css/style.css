@@ -393,6 +393,14 @@ header.hero::before {
     font-size: 0.95rem;
 }
 
+.compact-features {
+    padding: 3.25rem var(--container-padding);
+}
+
+.compact-features .section-header {
+    margin-bottom: 1.9rem;
+}
+
 .compact-features .features {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 1.25rem;
@@ -713,6 +721,14 @@ footer {
     .product-section,
     .why-section {
         padding: 3rem 1.1rem;
+    }
+
+    .compact-features {
+        padding: 2.6rem 1.1rem;
+    }
+
+    .compact-features .section-header {
+        margin-bottom: 1.5rem;
     }
 
     .flow-section {
