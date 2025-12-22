@@ -17,15 +17,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=20250308" />
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
-    <nav class="animate-fade-up">
+    <nav class="animate-fade-up" aria-label="Main navigation">
         <a href="/" class="lotriflow-logo" aria-label="LotriFlow">
             <img src="assets/logo.png" alt="LotriFlow" class="logo-img">
             <span class="logo-name"><span class="logo-name-lotri">lotri</span><span class="logo-name-flow">flow</span></span>
         </a>
+        <div class="nav-links">
+            <a href="/#products">Apps</a>
+            <a href="/quit/">LotriFlow Quit</a>
+            <a href="/privacy.html">Site Privacy</a>
+            <a href="/terms.html">Site Terms</a>
+        </div>
     </nav>
 
     <header class="hero">
@@ -48,35 +54,36 @@
         </div>
         
         <div class="grid animate-fade-up delay-300" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1000px; margin: 0 auto;">
-            
-            <a href="/quit/" class="feature-card glass-hover" style="text-decoration: none; display: block; padding: 3rem 2rem;">
-                <div style="margin-bottom: 24px; display: flex; align-items: center; justify-content: center; position: relative;">
-                    <div style="position: absolute; width: 80px; height: 80px; background: var(--primary); filter: blur(40px); opacity: 0.3; border-radius: 50%; z-index: 0;"></div>
-                    <img src="assets/lotriflow-quit-icon.png" alt="LotriFlow Quit" style="width: 110px; height: 110px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; z-index: 1;">
-                </div>
-                <h3 style="margin-bottom: 12px; font-size: 1.6rem; text-align: center; font-weight: 800;">LotriFlow Quit</h3>
-                <p style="margin-bottom: 28px; color: var(--text-body); text-align: center; font-size: 1.05rem;">
-                    The best data-private quit smoking app. Track your progress, unlock 18 health milestones, and see your body heal.
-                </p>
-                <div style="text-align: center;">
-                    <span style="color: var(--primary); font-weight: 700; background: rgba(56, 189, 248, 0.1); padding: 8px 20px; border-radius: 20px; transition: all 0.2s;">Explore App →</span>
-                </div>
+            <div class="feature-card glass-hover" style="padding: 3rem 2rem;">
+                <a href="/quit/" class="feature-card-link">
+                    <div style="margin-bottom: 24px; display: flex; align-items: center; justify-content: center; position: relative;">
+                        <div style="position: absolute; width: 80px; height: 80px; background: var(--primary); filter: blur(40px); opacity: 0.3; border-radius: 50%; z-index: 0;"></div>
+                        <img src="assets/lotriflow-quit-icon.png" alt="LotriFlow Quit" style="width: 110px; height: 110px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; z-index: 1;">
+                    </div>
+                    <h3 style="margin-bottom: 12px; font-size: 1.6rem; text-align: center; font-weight: 800;">LotriFlow Quit</h3>
+                    <p style="margin-bottom: 28px; color: var(--text-body); text-align: center; font-size: 1.05rem;">
+                        The best data-private quit smoking app. Track your progress, unlock 18 health milestones, and see your body heal.
+                    </p>
+                    <div style="text-align: center;">
+                        <span style="color: var(--primary); font-weight: 700; background: rgba(56, 189, 248, 0.1); padding: 8px 20px; border-radius: 20px; transition: all 0.2s;">Explore App →</span>
+                    </div>
+                </a>
                 <div style="text-align: center; margin-top: 16px; font-size: 0.9rem;">
-                    <a href="/quit/terms.html" style="color: var(--text-muted);">Terms</a>
+                    <a href="/quit/terms.html" style="color: var(--text-muted);">App Terms</a>
                     <span style="color: var(--text-muted); margin: 0 8px;">&bull;</span>
-                    <a href="/quit/privacy.html" style="color: var(--text-muted);">Privacy</a>
+                    <a href="/quit/privacy.html" style="color: var(--text-muted);">App Privacy</a>
                 </div>
-            </a>
-
+            </div>
         </div>
     </section>
 
     <footer class="footer">
         <div class="container">
             <div class="footer-links" style="margin-bottom: 2rem;">
-                 <a href="/quit/" style="color: var(--text-main); font-weight: 600;">Products</a>
-                 <a href="privacy.html" style="color: var(--text-muted);">Privacy</a>
-                 <a href="terms.html" style="color: var(--text-muted);">Terms</a>
+                 <a href="/#products" style="color: var(--text-main); font-weight: 600;">Apps</a>
+                 <a href="/quit/" style="color: var(--text-muted);">LotriFlow Quit</a>
+                 <a href="/privacy.html" style="color: var(--text-muted);">Site Privacy</a>
+                 <a href="/terms.html" style="color: var(--text-muted);">Site Terms</a>
             </div>
             <p>&copy; <span id="year">2025</span> LotriFlow. <span style="color: var(--text-light);">All rights reserved.</span></p>
         </div>
