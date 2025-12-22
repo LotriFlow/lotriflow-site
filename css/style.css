@@ -605,7 +605,13 @@ footer {
         gap: 0.5rem;
         position: static; /* Prevent nav from covering too much on scroll if stacked */
     }
-    
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
     /* If sticky is desired, we keep fixed but optimize height */
     body {
         padding-top: 0; /* Adjust if nav is static */
@@ -633,7 +639,7 @@ footer {
     }
 
     header.hero {
-        padding: 150px 1.1rem 60px;
+        padding: 60px 1.1rem 60px;
         row-gap: 1.5rem;
     }
 
@@ -678,7 +684,7 @@ footer {
     }
 
     .legal-content {
-        padding-top: 180px !important;
+        padding-top: 60px !important;
     }
 
     footer {
