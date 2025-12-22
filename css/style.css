@@ -393,6 +393,30 @@ header.hero::before {
     font-size: 0.95rem;
 }
 
+.compact-features .features {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+}
+
+.compact-features .feature-card {
+    padding: 1.4rem;
+    border-radius: 14px;
+}
+
+.compact-features .feature-icon {
+    font-size: 2.1rem;
+    margin-bottom: 0.6rem;
+}
+
+.compact-features .feature-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+}
+
+.compact-features .feature-card p {
+    font-size: 0.9rem;
+}
+
 .product-section {
     padding: 6rem var(--container-padding);
     background: #fff;
@@ -684,6 +708,7 @@ footer {
     .hero-stats { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
     .product-grid { grid-template-columns: 1fr; }
     .features { grid-template-columns: 1fr; }
+    .compact-features .features { grid-template-columns: 1fr; }
 
     .product-section,
     .why-section {
