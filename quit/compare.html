@@ -239,10 +239,10 @@
         .compare-table tr {
           background: #fff;
           border: 1px solid var(--border);
-          border-radius: 16px;
-          margin-bottom: 16px;
+          border-radius: 14px;
+          margin-bottom: 12px;
           overflow: hidden;
-          box-shadow: var(--shadow-sm);
+          box-shadow: none;
         }
 
         .compare-table td {
@@ -251,23 +251,26 @@
           gap: 12px;
           justify-content: space-between;
           align-items: flex-start;
-          padding: 12px 16px;
+          padding: 10px 14px;
           text-align: left;
           white-space: normal;
+          line-height: 1.4;
         }
 
         .compare-table td::before {
           color: var(--text-muted);
           content: attr(data-label);
-          flex: 0 0 38%;
+          flex: 0 0 34%;
           font-weight: 600;
+          font-size: 0.85rem;
         }
 
         .compare-table td[data-label="Feature"] {
           display: block;
           font-weight: 700;
           color: var(--text-dark);
-          background: var(--bg-section);
+          background: rgba(15, 23, 42, 0.04);
+          font-size: 0.95rem;
         }
 
         .compare-table td[data-label="Feature"]::before {
@@ -299,8 +302,8 @@
         }
 
         .compare-table th, .compare-table td {
-          padding: 12px 8px;
-          font-size: 0.8rem;
+          padding: 10px 8px;
+          font-size: 0.85rem;
         }
 
         .compare-table th {
@@ -312,11 +315,11 @@
         }
 
         .check, .cross {
-          font-size: 0.9rem;
+          font-size: 0.85rem;
         }
 
         .feature-row td:first-child {
-          font-size: 0.85rem;
+          font-size: 0.8rem;
         }
 
         .cta-section {
