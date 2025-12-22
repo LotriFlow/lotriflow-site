@@ -597,6 +597,12 @@ footer {
     }
 }
 
+@media (max-width: 960px) and (orientation: landscape) {
+    header.hero {
+        padding-top: 100px;
+    }
+}
+
 @media (max-width: 600px) {
     nav {
         padding: 0.75rem 1rem;
