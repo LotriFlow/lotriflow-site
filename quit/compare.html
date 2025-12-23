@@ -148,7 +148,7 @@
       }
 
       .preview-section {
-        padding: 20px 24px 80px;
+        padding: 24px 24px 80px;
         text-align: center;
       }
       
@@ -167,43 +167,28 @@
         align-items: center;
       }
 
-      .preview-card {
-        background: #fff;
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 18px;
-        display: flex;
-        flex-direction: column;
+      .preview-figure {
+        margin: 0;
+        display: grid;
         gap: 10px;
-        align-items: center;
-        box-shadow: var(--shadow-sm);
+        justify-items: center;
+        text-align: center;
       }
 
-      .preview-card-phone {
-        padding: 20px 18px 24px;
-      }
-
-      .preview-card-widget {
-        padding: 16px;
-      }
-
-      .preview-label {
-        font-size: 0.7rem;
-        letter-spacing: 0.12em;
+      .preview-figure figcaption {
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
-        font-weight: 700;
+        font-weight: 600;
         color: var(--text-muted);
-        background: rgba(15, 23, 42, 0.06);
-        padding: 4px 8px;
-        border-radius: 999px;
-        align-self: flex-start;
       }
 
       .preview-image {
         width: 100%;
         height: auto;
-        border-radius: 14px;
-        box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+        border-radius: 18px;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12), 0 4px 10px rgba(15, 23, 42, 0.06);
+        background: #fff;
       }
 
       .preview-image-phone {
@@ -212,22 +197,15 @@
 
       .preview-image-widget {
         max-width: 360px;
-        border-radius: 12px;
-        box-shadow: 0 12px 26px rgba(15, 23, 42, 0.12);
       }
 
       .preview-image-watch {
         max-width: 170px;
-        box-shadow: 0 12px 24px rgba(15, 23, 42, 0.14);
       }
 
       @media (max-width: 900px) {
         .preview-showcase {
           grid-template-columns: 1fr;
-        }
-
-        .preview-card {
-          padding: 16px;
         }
 
         .preview-image-phone {
@@ -400,14 +378,6 @@
           gap: 16px;
         }
 
-        .preview-card {
-          padding: 14px;
-        }
-
-        .preview-label {
-          font-size: 0.65rem;
-        }
-
         .preview-image-phone {
           max-width: 240px;
         }
@@ -503,19 +473,19 @@
         <p style="color: var(--text-muted);">Clean, modern design focused on your recovery.</p>
         
         <div class="preview-showcase">
-          <div class="preview-card preview-card-phone">
-            <span class="preview-label">iPhone</span>
+          <figure class="preview-figure preview-figure-phone">
             <img src="../assets/screenshots/ios_screenshot.png" alt="LotriFlow iPhone dashboard" class="preview-image preview-image-phone" />
-          </div>
+            <figcaption>iPhone</figcaption>
+          </figure>
           <div class="preview-stack">
-            <div class="preview-card preview-card-widget">
-              <span class="preview-label">Widget</span>
+            <figure class="preview-figure preview-figure-widget">
               <img src="../assets/screenshots/widget.png" alt="Quit progress widget" class="preview-image preview-image-widget" />
-            </div>
-            <div class="preview-card preview-card-watch">
-              <span class="preview-label">Watch</span>
+              <figcaption>Widget</figcaption>
+            </figure>
+            <figure class="preview-figure preview-figure-watch">
               <img src="../assets/screenshots/watch.png" alt="Apple Watch app" class="preview-image preview-image-watch" />
-            </div>
+              <figcaption>Watch</figcaption>
+            </figure>
           </div>
         </div>
       </section>
