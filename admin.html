@@ -10,13 +10,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Montserrat:wght@700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --primary: #38bdf8;
-        --primary-dark: #0284c7;
+        --primary: #2bb3ff;
+        --primary-dark: #0c6ea8;
+        --accent: #f4a340;
         --bg-dark: #0f172a;
         --bg-card: #1e293b;
         --bg-card-hover: #334155;
@@ -26,7 +27,8 @@
         --success: #22c55e;
         --warning: #f59e0b;
         --error: #ef4444;
-        --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+        --font-sans: "Figtree", sans-serif;
+        --font-display: "Space Grotesk", sans-serif;
       }
 
       * {
@@ -70,7 +72,7 @@
       }
 
       .login-box h1 {
-        font-family: "Montserrat", sans-serif;
+        font-family: var(--font-display);
         font-size: 1.8rem;
         margin-bottom: 0.5rem;
       }
@@ -159,7 +161,7 @@
       }
 
       .header-left h1 {
-        font-family: "Montserrat", sans-serif;
+        font-family: var(--font-display);
         font-size: 1.3rem;
       }
 
@@ -274,7 +276,7 @@
         background: var(--warning);
       }
       .stat-card.rating::before {
-        background: #a855f7;
+        background: var(--accent);
       }
 
       .stat-label {
@@ -285,7 +287,7 @@
 
       .stat-value {
         font-size: 2.2rem;
-        font-weight: 800;
+        font-weight: 700;
         margin-bottom: 0.25rem;
       }
 
