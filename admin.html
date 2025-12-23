@@ -264,61 +264,86 @@
       /* Stats Grid */
       .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 1.5rem;
-        margin-bottom: 2.5rem;
+        margin-bottom: 3rem;
       }
 
       .stat-card {
         background: var(--bg-card);
-        padding: 1.75rem;
+        padding: 1.25rem;
         border-radius: 16px;
         border: 1px solid var(--border);
         position: relative;
         overflow: hidden;
         box-shadow: var(--shadow-sm);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        min-height: 130px;
       }
 
-      .stat-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 4px;
-        background: var(--primary);
+      .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--shadow-lg);
+        border-color: var(--primary);
       }
 
-      .stat-card.revenue::before {
-        background: var(--success);
-      }
-      .stat-card.users::before {
-        background: var(--warning);
-      }
-      .stat-card.rating::before {
-        background: var(--accent);
-      }
-
-      .stat-label {
-        color: var(--text-muted);
-        font-size: 0.9rem;
+      .stat-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
         margin-bottom: 0.5rem;
       }
 
-      .stat-value {
-        font-size: 2.2rem;
+      .stat-icon-wrapper {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(43, 179, 255, 0.1);
+        color: var(--primary);
+      }
+
+      .stat-card.revenue .stat-icon-wrapper { background: rgba(34, 197, 94, 0.1); color: var(--success); }
+      .stat-card.users .stat-icon-wrapper { background: rgba(245, 158, 11, 0.1); color: var(--warning); }
+      .stat-card.rating .stat-icon-wrapper { background: rgba(244, 163, 64, 0.1); color: var(--accent); }
+
+      .stat-label {
+        color: var(--text-muted);
+        font-size: 0.8rem;
         font-weight: 700;
-        margin-bottom: 0.25rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0;
+      }
+
+      .stat-value {
+        font-size: 2.25rem;
+        font-weight: 700;
         color: var(--secondary);
+        font-family: var(--font-display);
+        margin: 0.25rem 0;
       }
 
-      .stat-change {
-        font-size: 0.85rem;
+      .stat-trend {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.35rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        background: rgba(34, 197, 94, 0.1);
         color: var(--success);
+        align-self: flex-start;
+        margin-top: auto;
       }
 
-      .stat-change.negative {
-        color: var(--error);
+      .stat-trend.neutral {
+        background: rgba(81, 96, 116, 0.08);
+        color: var(--text-muted);
       }
 
       /* Fetch Button */
@@ -643,24 +668,48 @@
 
         <div class="stats-grid">
           <div class="stat-card downloads">
-            <p class="stat-label">Total Downloads</p>
+            <div class="stat-header">
+              <p class="stat-label">Total Downloads</p>
+              <div class="stat-icon-wrapper"><i data-feather="download"></i></div>
+            </div>
             <p class="stat-value" id="displayDownloads">0</p>
-            <p class="stat-change" id="changeDownloads">+0 this week</p>
+            <div class="stat-trend" id="trendDownloads">
+              <i data-feather="trending-up" style="width:12px; height:12px; margin-right:4px;"></i>
+              <span id="changeDownloads">+0 this week</span>
+            </div>
           </div>
           <div class="stat-card revenue">
-            <p class="stat-label">Revenue (USD)</p>
+            <div class="stat-header">
+              <p class="stat-label">Revenue (USD)</p>
+              <div class="stat-icon-wrapper"><i data-feather="dollar-sign"></i></div>
+            </div>
             <p class="stat-value" id="displayRevenue">$0</p>
-            <p class="stat-change" id="changeRevenue">+$0 this month</p>
+            <div class="stat-trend" id="trendRevenue">
+              <i data-feather="trending-up" style="width:12px; height:12px; margin-right:4px;"></i>
+              <span id="changeRevenue">+$0 this month</span>
+            </div>
           </div>
           <div class="stat-card users">
-            <p class="stat-label">Active Users</p>
+            <div class="stat-header">
+              <p class="stat-label">Active Users</p>
+              <div class="stat-icon-wrapper"><i data-feather="users"></i></div>
+            </div>
             <p class="stat-value" id="displayActiveUsers">0</p>
-            <p class="stat-change" id="changeActiveUsers">+0 this week</p>
+            <div class="stat-trend" id="trendUsers">
+              <i data-feather="trending-up" style="width:12px; height:12px; margin-right:4px;"></i>
+              <span id="changeActiveUsers">+0 this week</span>
+            </div>
           </div>
           <div class="stat-card rating">
-            <p class="stat-label">App Rating</p>
+            <div class="stat-header">
+              <p class="stat-label">App Rating</p>
+              <div class="stat-icon-wrapper"><i data-feather="star"></i></div>
+            </div>
             <p class="stat-value" id="displayRating">0.0 ⭐</p>
-            <p class="stat-change" id="changeRatings">0 reviews</p>
+            <div class="stat-trend neutral" id="trendRating">
+              <i data-feather="message-square" style="width:12px; height:12px; margin-right:4px;"></i>
+              <span id="changeRatings">0 reviews</span>
+            </div>
           </div>
         </div>
 
