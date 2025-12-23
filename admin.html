@@ -264,44 +264,47 @@
       /* Stats Grid */
       .stats-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
       }
 
       .stat-card {
         background: var(--bg-card);
-        padding: 1rem 1.25rem;
-        border-radius: 14px;
+        padding: 0.75rem 1rem;
+        border-radius: 12px;
         border: 1px solid var(--border);
-        position: relative;
-        overflow: hidden;
         box-shadow: var(--shadow-sm);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.2s ease;
       }
 
       .stat-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--shadow-lg);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
         border-color: var(--primary);
       }
 
       .stat-header {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
-        margin-bottom: 0.5rem;
+        align-items: center;
+        margin-bottom: 0.25rem;
       }
 
       .stat-icon-wrapper {
-        width: 42px;
-        height: 42px;
-        border-radius: 12px;
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;
         background: rgba(43, 179, 255, 0.1);
         color: var(--primary);
+      }
+
+      .stat-icon-wrapper .feather {
+        width: 14px;
+        height: 14px;
       }
 
       .stat-card.revenue .stat-icon-wrapper { background: rgba(34, 197, 94, 0.1); color: var(--success); }
@@ -310,32 +313,29 @@
 
       .stat-label {
         color: var(--text-muted);
-        font-size: 0.8rem;
-        font-weight: 700;
+        font-size: 0.7rem;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        margin-bottom: 0;
+        letter-spacing: 0.03em;
       }
 
       .stat-value {
-        font-size: 2.25rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: var(--secondary);
         font-family: var(--font-display);
-        margin: 0.25rem 0;
+        margin: 0.1rem 0 0.25rem;
       }
 
       .stat-trend {
         display: inline-flex;
         align-items: center;
-        padding: 0.35rem 0.75rem;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        font-weight: 700;
+        padding: 0.2rem 0.5rem;
+        border-radius: 12px;
+        font-size: 0.65rem;
+        font-weight: 600;
         background: rgba(34, 197, 94, 0.1);
         color: var(--success);
-        align-self: flex-start;
-        margin-top: auto;
       }
 
       .stat-trend.neutral {
