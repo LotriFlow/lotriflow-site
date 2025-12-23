@@ -133,6 +133,44 @@ async function fetchAppInfo(token, appId) {
 }
 
 /**
+ * Fetch public App Store metadata (ratings, review count)
+ */
+async function fetchPublicAppStoreData(appId, country = "us") {
+  const url = `https://itunes.apple.com/lookup?${new URLSearchParams({
+    id: appId,
+    country,
+  })}`;
+
+  const response = await fetch(url, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`App Store lookup error: ${response.status} - ${error}`);
+  }
+
+  const data = await response.json();
+  if (!data.results || data.results.length === 0) {
+    throw new Error(`App Store lookup returned no results for app id ${appId}`);
+  }
+
+  const result = data.results[0];
+  const rating =
+    result.averageUserRatingForCurrentVersion ??
+    result.averageUserRating ??
+    null;
+  const reviews =
+    result.userRatingCountForCurrentVersion ??
+    result.userRatingCount ??
+    null;
+
+  return { rating, reviews, raw: result };
+}
+
+/**
  * Main API handler
  */
 module.exports = async function handler(req, res) {
@@ -150,8 +188,14 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    // Generate JWT token
-    const token = generateJWT();
+    // Generate JWT token (optional if ASC credentials are missing)
+    let token = null;
+    let jwtError = null;
+    try {
+      token = generateJWT();
+    } catch (err) {
+      jwtError = err.message;
+    }
     
     // Debug info for troubleshooting
     const debugInfo = {
@@ -159,7 +203,9 @@ module.exports = async function handler(req, res) {
       issuerIdConfigured: process.env.ASC_ISSUER_ID ? process.env.ASC_ISSUER_ID.substring(0, 8) + "..." : "MISSING",
       privateKeyConfigured: process.env.ASC_PRIVATE_KEY ? `${process.env.ASC_PRIVATE_KEY.length} chars` : "MISSING",
       vendorConfigured: process.env.VENDOR_NUMBER ? "YES" : "MISSING",
+      appIdConfigured: process.env.APP_ID || "MISSING",
       tokenGenerated: token ? token.substring(0, 50) + "..." : "FAILED",
+      jwtError: jwtError || "NONE",
     };
 
     // Prepare response object
@@ -173,52 +219,83 @@ module.exports = async function handler(req, res) {
       raw: { debug: debugInfo },
     };
 
-    // Try to fetch app info (for ratings)
     const appId = process.env.APP_ID;
+    const appStoreCountry = process.env.APP_STORE_COUNTRY || "us";
+
+    // Fetch public App Store ratings/reviews (no auth required)
     if (appId) {
+      try {
+        const appStoreData = await fetchPublicAppStoreData(
+          appId,
+          appStoreCountry
+        );
+        stats.raw.appStoreLookup = appStoreData.raw;
+        if (appStoreData.rating !== null) {
+          stats.rating = appStoreData.rating;
+        }
+        if (appStoreData.reviews !== null) {
+          stats.reviews = appStoreData.reviews;
+        }
+      } catch (err) {
+        stats.raw.appStoreLookupError = err.message;
+      }
+    }
+
+    // Try to fetch app info (App Store Connect)
+    if (token && appId) {
       try {
         const appInfo = await fetchAppInfo(token, appId);
         stats.raw.appInfo = appInfo;
       } catch (err) {
         stats.raw.appInfoError = err.message;
       }
+    } else if (!token && jwtError) {
+      stats.raw.appInfoError = jwtError;
     }
 
     // Try to fetch sales data
-    try {
-      const { response: salesResponse, date: salesDate } = await fetchSalesReport(token);
-      // Sales reports come as gzipped TSV, parse accordingly
-      const salesData = await salesResponse.text();
-      stats.raw.sales = salesData;
-      stats.raw.salesDate = salesDate;
+    if (token) {
+      try {
+        const { response: salesResponse, date: salesDate } = await fetchSalesReport(token);
+        // Sales reports come as gzipped TSV, parse accordingly
+        const salesData = await salesResponse.text();
+        stats.raw.sales = salesData;
+        stats.raw.salesDate = salesDate;
 
-      // Parse simple metrics from sales data if available
-      // This is a simplified parser - actual format may vary
-      const lines = salesData.split("\n");
-      if (lines.length > 1) {
-        // Sum up units from sales report
-        let totalUnits = 0;
-        let totalRevenue = 0;
-        for (let i = 1; i < lines.length; i++) {
-          const cols = lines[i].split("\t");
-          if (cols.length > 7) {
-            totalUnits += parseInt(cols[7]) || 0; // Units column
-            totalRevenue += parseFloat(cols[8]) || 0; // Revenue column
+        // Parse simple metrics from sales data if available
+        // This is a simplified parser - actual format may vary
+        const lines = salesData.split("\n");
+        if (lines.length > 1) {
+          // Sum up units from sales report
+          let totalUnits = 0;
+          let totalRevenue = 0;
+          for (let i = 1; i < lines.length; i++) {
+            const cols = lines[i].split("\t");
+            if (cols.length > 7) {
+              totalUnits += parseInt(cols[7]) || 0; // Units column
+              totalRevenue += parseFloat(cols[8]) || 0; // Revenue column
+            }
           }
+          stats.downloads = totalUnits;
+          stats.revenue = totalRevenue.toFixed(2);
         }
-        stats.downloads = totalUnits;
-        stats.revenue = totalRevenue.toFixed(2);
+      } catch (err) {
+        stats.raw.salesError = err.message;
       }
-    } catch (err) {
-      stats.raw.salesError = err.message;
+    } else if (jwtError) {
+      stats.raw.salesError = jwtError;
     }
 
     // Try to fetch analytics
-    try {
-      const analytics = await fetchAnalytics(token);
-      stats.raw.analytics = analytics;
-    } catch (err) {
-      stats.raw.analyticsError = err.message;
+    if (token) {
+      try {
+        const analytics = await fetchAnalytics(token);
+        stats.raw.analytics = analytics;
+      } catch (err) {
+        stats.raw.analyticsError = err.message;
+      }
+    } else if (jwtError) {
+      stats.raw.analyticsError = jwtError;
     }
 
     return res.status(200).json(stats);
@@ -226,7 +303,7 @@ module.exports = async function handler(req, res) {
     console.error("Stats API error:", error);
     return res.status(500).json({
       error: error.message,
-      hint: "Make sure ASC_ISSUER_ID, ASC_KEY_ID, ASC_PRIVATE_KEY, and VENDOR_NUMBER are set in Vercel environment variables",
+      hint: "Make sure ASC_ISSUER_ID, ASC_KEY_ID, ASC_PRIVATE_KEY, VENDOR_NUMBER, and APP_ID are set in Vercel environment variables",
     });
   }
 };

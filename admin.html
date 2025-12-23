@@ -916,6 +916,18 @@
             document.getElementById('inputRating').value = data.rating;
             document.getElementById('displayRating').textContent = data.rating + ' ⭐';
           }
+
+          if (data.reviews !== null) {
+            const reviewsValue = Number(data.reviews);
+            const reviewsText = Number.isFinite(reviewsValue)
+              ? reviewsValue.toLocaleString()
+              : String(data.reviews);
+            const reviewsLabel = reviewsText.toLowerCase().includes('review')
+              ? reviewsText
+              : `${reviewsText} reviews`;
+            document.getElementById('inputReviews').value = reviewsLabel;
+            document.getElementById('changeRatings').textContent = reviewsLabel;
+          }
           
           // Save to localStorage
           saveStats();
