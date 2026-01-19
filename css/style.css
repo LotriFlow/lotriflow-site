@@ -10,7 +10,8 @@
   --text-muted: #516074;
   --text-light: #6c7c91;
   --bg-body: linear-gradient(180deg, #f8f3ec 0%, #f2f7fb 45%, #edf2f8 100%);
-  --bg-aurora: radial-gradient(
+  --bg-aurora:
+    radial-gradient(
       circle at 18% 8%,
       rgba(43, 179, 255, 0.18),
       transparent 50%
@@ -21,10 +22,10 @@
   --border: rgba(15, 23, 42, 0.1);
   --border-light: rgba(255, 255, 255, 0.7);
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 10px 26px rgba(15, 23, 42, 0.12),
-    0 2px 6px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 24px 60px rgba(15, 23, 42, 0.16),
-    0 8px 20px rgba(15, 23, 42, 0.08);
+  --shadow-md:
+    0 10px 26px rgba(15, 23, 42, 0.12), 0 2px 6px rgba(15, 23, 42, 0.06);
+  --shadow-lg:
+    0 24px 60px rgba(15, 23, 42, 0.16), 0 8px 20px rgba(15, 23, 42, 0.08);
   --shadow-glow: 0 0 30px rgba(43, 179, 255, 0.2);
   --container-padding: 8%;
   --max-width: 1200px;
@@ -180,7 +181,9 @@ nav {
   padding: 0.6rem 1.2rem;
   border-radius: 10px;
   font-weight: 700;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -440,7 +443,9 @@ header.hero::before {
   padding: 2rem;
   border-radius: 16px;
   border: 1px solid rgba(15, 23, 42, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .feature-card-link {
@@ -1191,7 +1196,9 @@ footer {
 
 /* Hover animation for feature cards */
 .feature-card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 .feature-card:hover {
   transform: translateY(-8px);
@@ -1233,6 +1240,18 @@ button:focus-visible {
 }
 
 .app-store-badge:hover {
+  transform: scale(1.05);
+}
+
+.play-store-badge {
+  height: 82px;
+  width: auto;
+  margin-top: -13px;
+  margin-bottom: -13px;
+  transition: transform 0.2s ease;
+}
+
+.play-store-badge:hover {
   transform: scale(1.05);
 }
 
@@ -1328,10 +1347,18 @@ section[id] {
 
   .store-buttons {
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
   }
 
   .app-store-badge {
     height: 50px;
+  }
+
+  .play-store-badge {
+    height: 74px;
+    margin-top: -12px;
+    margin-bottom: -12px;
   }
 
   .product-card-featured {
